@@ -135,9 +135,10 @@ docker pull selenium/standalone-chrome:155.0-chromedriver-155.0-grid-4.51.0-2026
 docker pull jenkins/jenkins:2.580.2-lts-jdk21
 ```
 
-Construisez l'image Jenkins du lab (plugins compris) :
+Créez le réseau Docker partagé par le lab et les environnements d'Embarq, puis construisez l'image Jenkins du lab (plugins compris) :
 
 ```bash
+docker network create lab
 cd ~/iroise/lab
 cp .env.exemple .env
 docker compose build
@@ -171,6 +172,7 @@ git checkout tp-00-pipeline
 | Images | `docker images` | les 5 images de la section 7, plus `lab-jenkins` |
 | Runner | `gitlab-runner --version` | une version s'affiche |
 | Dépôt | `cd ~/iroise && git branch --show-current` | `tp-00-pipeline` |
+| Réseau | `docker network ls \| grep lab` | une ligne `lab` |
 | Ports libres | `ss -ltn \| grep -E ':(8080\|8081\|8082\|8089\|8090\|4444\|7900) '` | rien |
 
 ## 9. Dépannage

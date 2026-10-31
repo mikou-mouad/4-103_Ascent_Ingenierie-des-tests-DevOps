@@ -47,9 +47,10 @@ services:
       - lab
 
 networks:
-  # Réseau partagé avec les environnements d'Embarq (e2e, preprod, prod)
+  # Réseau partagé avec les environnements d'Embarq (dev, e2e, preprod, prod),
+  # créé une fois pour toutes avec : docker network create lab
   lab:
-    name: lab
+    external: true
 
 volumes:
   jenkins_home:
