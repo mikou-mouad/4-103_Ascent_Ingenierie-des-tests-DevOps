@@ -1,0 +1,45 @@
+# Configuration de Jenkins « as code » (plugin configuration-as-code), relue à chaque démarrage.
+# ${VAR} vient des variables d'environnement du conteneur ; ^${VAR} reste tel quel pour Jenkins.
+jenkins:
+  systemMessage: "Jenkins du lab Embarq – formation 4-103"
+  numExecutors: 2
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_ID}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+unclassified:
+  location:
+    url: "http://localhost:8080/"
+
+jobs:
+  - script: |
+      pipelineJob('embarq') {
+        description('Pipeline d\'Embarq. Déclenché par GitLab CI/CD (embarq/ci/declencher-jenkins.sh).')
+        parameters {
+          stringParam('BRANCHE', 'tp-00-pipeline', 'Branche à construire')
+          stringParam('COMMIT', '', 'Commit poussé sur GitLab (pour information)')
+        }
+        logRotator {
+          numToKeep(50)
+        }
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('${GITLAB_PROJET}')
+                }
+                branch('^${BRANCHE}')
+              }
+            }
+            scriptPath('embarq/Jenkinsfile')
+            lightweight(false)
+          }
+        }
+      }

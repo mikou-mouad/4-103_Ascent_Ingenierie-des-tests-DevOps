@@ -1,0 +1,15 @@
+# GitLab CI/CD : la porte d'entrée du pipeline d'Embarq.
+# Le job tourne sur le GitLab Runner de votre machine (tag « embarq ») : il lance le pipeline Jenkins
+# du lab, affiche sa console et échoue si Jenkins échoue.
+# Variables à définir dans GitLab (Settings > CI/CD > Variables) : JENKINS_USER et JENKINS_TOKEN.
+stages:
+  - jenkins
+
+jenkins:
+  stage: jenkins
+  tags:
+    - embarq
+  variables:
+    GIT_DEPTH: "1"
+  script:
+    - bash embarq/ci/declencher-jenkins.sh

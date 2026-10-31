@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embarq – Iroise Traversées</title>
+  <link rel="stylesheet" href="/embarq.css">
+</head>
+<body>
+<header>
+  <a href="/" class="marque">Iroise Traversées</a>
+  <span class="slogan">Brest · Le Conquet · Molène · Ouessant</span>
+</header>
+
+<main>
+  <h1>Prochaines traversées</h1>
+
+  <p th:if="${traversees.isEmpty()}" id="aucune-traversee">Aucune traversée programmée.</p>
+
+  <table th:unless="${traversees.isEmpty()}" id="traversees">
+    <thead>
+    <tr><th>Départ</th><th>Trajet</th><th>Navire</th><th>Places</th><th></th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${traversees}" th:id="|traversee-${d.traversee().id}|">
+      <td th:text="${#temporals.format(d.traversee().dateHeure, 'EEEE d MMMM, HH:mm')}">lundi 1 avril, 08:30</td>
+      <td th:text="|${d.traversee().depart} → ${d.traversee().arrivee}|">Brest → Ouessant</td>
+      <td th:text="${d.traversee().navire}">Fromveur II</td>
+      <td class="places" th:text="${d.complete()} ? 'Complet' : ${d.placesRestantes()}">280</td>
+      <td>
+        <a th:unless="${d.complete()}" class="bouton" th:id="|reserver-${d.traversee().id}|"
+           th:href="@{/traversees/{id}/reservation(id=${d.traversee().id})}">Réserver</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+
+<footer id="version" th:text="|Embarq ${version} · ${environnement}|">Embarq dev · local</footer>
+</body>
+</html>
