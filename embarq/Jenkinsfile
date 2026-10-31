@@ -41,6 +41,8 @@ pipeline {
             post {
                 always {
                     junit 'embarq/target/failsafe-reports/*.xml'
+                    // Couverture des tests unitaires et d'intégration (le seuil est vérifié par Maven : jacoco:check)
+                    recordCoverage tools: [[parser: 'JACOCO', pattern: 'embarq/target/site/jacoco/jacoco.xml']]
                 }
             }
         }
