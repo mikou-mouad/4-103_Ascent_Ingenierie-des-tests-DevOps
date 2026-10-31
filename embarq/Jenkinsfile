@@ -99,6 +99,47 @@ pipeline {
                 }
             }
         }
+
+        stage('Préproduction') {
+            steps {
+                dir('embarq') {
+                    sh 'bash deploy/deployer.sh preprod $VERSION'
+                    sh 'bash deploy/smoke-test.sh http://embarq-preprod:8080 $VERSION'
+                }
+            }
+        }
+
+        stage('Approbation') {
+            steps {
+                // Livraison continue : la mise en production est une décision humaine, prise dans Jenkins
+                timeout(time: 15, unit: 'MINUTES') {
+                    input message: "Mettre Embarq ${env.VERSION} en production ?", ok: 'Déployer en production'
+                }
+            }
+        }
+
+        stage('Production') {
+            steps {
+                dir('embarq') {
+                    script {
+                        // La version en production avant ce déploiement : celle qu'on remet si ça tourne mal
+                        def precedente = sh(returnStdout: true, script:
+                                "docker inspect --format '{{.Config.Image}}' embarq-prod-app-1 2>/dev/null | cut -d: -f2 || true").trim()
+                        try {
+                            sh 'bash deploy/deployer.sh prod $VERSION'
+                            sh 'bash deploy/smoke-test.sh http://embarq-prod:8080 $VERSION'
+                        } catch (erreur) {
+                            if (precedente) {
+                                echo "Échec en production : retour à la version ${precedente}"
+                                sh "bash deploy/deployer.sh prod ${precedente}"
+                                sh "bash deploy/smoke-test.sh http://embarq-prod:8080 ${precedente}"
+                            }
+                            error "Mise en production de ${env.VERSION} annulée. Production : ${precedente ?: 'aucune version'}"
+                        }
+                    }
+                }
+            }
+        }
     }
 
     post {
