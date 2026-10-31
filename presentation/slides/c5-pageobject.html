@@ -1,0 +1,14 @@
+<section id="c5-pageobject" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 5 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Page Object et attentes explicites</h2>
+<div style="display:flex;gap:36px;align-items:stretch">
+<div style="width:960px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:22px;line-height:1.5;color:#F2EFE9;white-space:nowrap"><span style="color:#7F9496">// PageReservation : une classe par page</span><br>PageReservation(WebDriver navigateur) {<br>&#160;&#160;&#160;&#160;this.navigateur = navigateur;<br>&#160;&#160;&#160;&#160;<span style="color:#F4C95D">new WebDriverWait</span>(navigateur, Duration.ofSeconds(10))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.until(ExpectedConditions<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.visibilityOfElementLocated(<span style="color:#8FD3D3">By.id("valider")</span>));<br>}<br><br>public PageConfirmation valider() {<br>&#160;&#160;&#160;&#160;navigateur.findElement(<span style="color:#8FD3D3">By.id("valider")</span>).click();<br>&#160;&#160;&#160;&#160;return new PageConfirmation(navigateur);<br>}</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:26px;line-height:1.4;color:#55616A"><b style="color:#1A2326">La page</b> connaît les sélecteurs et offre des actions métier.</p>
+<p style="font-size:26px;line-height:1.4;color:#55616A"><b style="color:#1A2326">Le test</b> ne contient aucun sélecteur :</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:18px;line-height:1.5;background:#E4E0D8;border-radius:12px;padding:14px 16px;color:#1A2326">PageAccueil.ouvrir(navigateur, APP_URL)<br>&#160;.reserverLaPremiereTraversee()<br>&#160;.saisir("Le Gall", …, 2, 1, 0)<br>&#160;.valider();</p>
+<p style="font-size:26px;line-height:1.4;color:#55616A"><b style="color:#1A2326">On attend un état</b>, pas une durée. Jamais de Thread.sleep.</p>
+</div>
+</div>
+<aside>Extrait de la correction du TP 05 (solutions/05-selenium/). Au TP 06, les By.id deviendront testId(…) : seules les trois pages changeront, pas ReservationE2E. Pourquoi pas Thread.sleep(2000) ? Trop court sur une machine chargée (test instable), trop long le reste du temps (pipeline lent). L'attente explicite rend la main dès que l'élément est là, et échoue clairement après 10 secondes.</aside>
+</section>

@@ -1,0 +1,17 @@
+<section id="c6-cas-de-test" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 6 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Documenter un cas de test</h2>
+<table style="font-size:23px;table-layout:fixed;color:#1A2326">
+<tr><th style="width:24%;background:#102A2E;color:#F2EFE9">Rubrique</th><th style="width:76%;background:#102A2E;color:#F2EFE9">CT-E2E-01 · Une famille réserve une traversée et reçoit sa référence</th></tr>
+<tr><td><b>Exigence</b></td><td>Quelle règle métier ce cas vérifie-t-il ?</td></tr>
+<tr><td><b>Préconditions</b></td><td>Sur quel environnement, avec quelles données de départ ?</td></tr>
+<tr><td><b>Étapes et données</b></td><td>1, 2, 3… · « Le Gall », 2 adultes, 1 enfant, 0 vélo</td></tr>
+<tr><td><b>Résultat attendu</b></td><td>Ce qu'on doit voir, précisément</td></tr>
+<tr><td><b>Automatisé par</b></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">ReservationE2E#un_passager_reserve_une_traversee_en_famille</span></td></tr>
+</table>
+<div style="display:flex;gap:32px;align-items:center">
+<div style="width:860px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:22px;line-height:1.5;color:#F2EFE9;white-space:nowrap">@Test<br>@DisplayName(<span style="color:#F4C95D">"CT-E2E-01 · Une famille réserve "</span><br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+ <span style="color:#F4C95D">"une traversée et reçoit sa référence"</span>)<br>void un_passager_reserve_une_traversee_en_famille() {</p></div>
+<p style="flex:1;font-size:26px;line-height:1.4;color:#55616A">L'identifiant <b style="color:#1A2326">CT-…</b> relie la fiche, le test et le rapport de Jenkins.</p>
+</div>
+<aside>Modèle du TP 06 : embarq/docs/cas-de-test.md, avec un index (identifiant, titre, exigence, niveau, automatisé par, étape du pipeline) et une fiche par cas. Dans le vrai code, le @DisplayName tient sur une ligne ; il est coupé ici pour la slide. Pour que Jenkins affiche ces phrases, surefire et failsafe utilisent le reporter JUnit5Xml30StatelessReporter (configuration donnée dans l'énoncé). Documenter aussi l'exécution : embarq/docs/tests.md, une page pour Tom.</aside>
+</section>

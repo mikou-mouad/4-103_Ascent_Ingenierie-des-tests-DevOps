@@ -1,0 +1,28 @@
+<section id="c5-tp" data-transition="fade" style="background:#1F4E5A;color:#F2EFE9;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:grid;grid-template-columns:560px 1fr;gap:72px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<x-icon name="Wrench" style="color:#F4C95D;width:72px;height:72px"></x-icon>
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F4C95D">À vous de jouer</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:96px;font-weight:700;line-height:1.0;color:#F2EFE9">TP 05</h2>
+<p style="font-family:'Bitter', Georgia, serif;font-size:42px;line-height:1.2;color:#F2EFE9">Tests end-to-end avec Selenium</p>
+<p style="font-size:29px;line-height:1.35;color:#B9C7C9">1 h 05 · 10h55 – 12h00</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:25px;color:#1F4E5A;background:#F2EFE9;padding:10px 20px;border-radius:12px;align-self:flex-start">tp-05-selenium</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h3 style="font-size:36px;font-weight:700;color:#F4C95D">Vous allez</h3>
+<ul style="font-size:28px;line-height:1.4;color:#F2EFE9">
+<li>automatiser le parcours de réservation, dans un vrai navigateur</li>
+<li>écrire PageAccueil, PageReservation et PageConfirmation, avec des attentes explicites</li>
+<li>lancer les tests sur la Grid, et les regarder sur le port 7900</li>
+<li>ajouter l'étape « Tests end-to-end » au pipeline</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#173E48;border-radius:18px;padding:28px">
+<h3 style="font-size:36px;font-weight:700;color:#F4C95D">C'est réussi quand</h3>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">mvn -B -Pe2e verify est vert sur l'environnement e2e</p></div>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">ReservationE2E ne contient aucun sélecteur</p></div>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">Jenkins affiche l'étape « Tests end-to-end » et ses résultats</p></div>
+</div>
+</div>
+<aside>Énoncé : tp/05-selenium/README.md. Correction : solutions/05-selenium/. Commande locale : mvn -B -Pe2e verify -Dapp.url=http://embarq-e2e:8080. Faire regarder l'onglet 7900 pendant les tests : c'est le moment marquant de la journée. Question 4 : comparer la durée d'un test end-to-end et d'un test unitaire, et en tirer le nombre de tests end-to-end à écrire (peu, sur les parcours critiques).</aside>
+</section>

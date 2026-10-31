@@ -1,0 +1,26 @@
+<section id="lab" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#D7263D">Le lab</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:60px;font-weight:700;line-height:1.1;color:#1A2326">Une machine Ubuntu par participant, tout dans Docker</h2>
+<div style="display:flex;align-items:center;gap:14px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#102A2E;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#F2EFE9">git push</p><p style="font-size:22px;line-height:1.3;color:#B9C7C9">depuis ~/iroise</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#102A2E;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#F2EFE9">gitlab.com</p><p style="font-size:22px;line-height:1.3;color:#B9C7C9">votre projet embarq · .gitlab-ci.yml</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#D9EBEA;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#1A2326">GitLab Runner</p><p style="font-size:22px;line-height:1.3;color:#55616A">sur la machine · tag embarq · shell</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#D9EBEA;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#1A2326">Jenkins</p><p style="font-size:22px;line-height:1.3;color:#55616A">localhost:8080 · Jenkinsfile</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#D9EBEA;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#1A2326">Docker</p><p style="font-size:22px;line-height:1.3;color:#55616A">tests, Grid, environnements</p></div>
+</div>
+<table style="font-size:23px;table-layout:fixed;color:#1A2326">
+<tr><th style="width:32%;background:#102A2E;color:#F2EFE9">Service</th><th style="width:30%;background:#102A2E;color:#F2EFE9">Depuis la machine</th><th style="width:24%;background:#102A2E;color:#F2EFE9">Dans le réseau lab</th><th style="width:14%;background:#102A2E;color:#F2EFE9">Démarré au</th></tr>
+<tr><td>Jenkins</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:8080</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">jenkins</span></td><td>TP 00</td></tr>
+<tr><td>Selenium Grid</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:4444</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">selenium</span></td><td>TP 00</td></tr>
+<tr><td>noVNC (le navigateur de test)</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:7900</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em"></span></td><td>TP 00</td></tr>
+<tr><td>Embarq « dev »</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:8090</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">embarq-dev</span></td><td>TP 00</td></tr>
+<tr><td>Embarq « e2e »</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:8089</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">embarq-e2e</span></td><td>TP 05</td></tr>
+<tr><td>Embarq « preprod »</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:8081</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">embarq-preprod</span></td><td>TP 07</td></tr>
+<tr><td>Embarq « prod »</td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">http://localhost:8082</span></td><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">embarq-prod</span></td><td>TP 07</td></tr>
+</table>
+<aside>Ubuntu 24.04 avec bureau, 4 vCPU minimum, 16 Go de RAM, 60 Go de disque, préparée la veille avec guide-installation-lab.md (outils, images Docker, dépendances Maven). Aucun port n'est ouvert sur Internet : le GitLab Runner va chercher ses jobs chez gitlab.com. Vérifier dès maintenant que chacun a son compte gitlab.com. Les conteneurs se parlent par leur nom dans le réseau Docker lab : le navigateur de la Grid ouvre http://embarq-e2e:8080, pas localhost:8089.</aside>
+</section>

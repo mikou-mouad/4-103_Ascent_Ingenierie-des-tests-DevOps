@@ -1,0 +1,28 @@
+<section id="c7-tp" data-transition="fade" style="background:#1F4E5A;color:#F2EFE9;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:grid;grid-template-columns:560px 1fr;gap:72px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<x-icon name="Wrench" style="color:#F4C95D;width:72px;height:72px"></x-icon>
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F4C95D">À vous de jouer</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:96px;font-weight:700;line-height:1.0;color:#F2EFE9">TP 07</h2>
+<p style="font-family:'Bitter', Georgia, serif;font-size:42px;line-height:1.2;color:#F2EFE9">Déploiement continu avec des tests à chaque étape</p>
+<p style="font-size:29px;line-height:1.35;color:#B9C7C9">1 h · 14h45 – 15h45</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:25px;color:#1F4E5A;background:#F2EFE9;padding:10px 20px;border-radius:12px;align-self:flex-start">tp-07-deploiement</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h3 style="font-size:36px;font-weight:700;color:#F4C95D">Vous allez</h3>
+<ul style="font-size:28px;line-height:1.4;color:#F2EFE9">
+<li>écrire les smoke tests de l'application déployée, version comprise</li>
+<li>prolonger le pipeline : préprod, approbation, production</li>
+<li>revenir automatiquement à la version d'avant si la production échoue</li>
+<li>rejouer le vendredi noir : une erreur de configuration propre à la production</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#173E48;border-radius:18px;padding:28px">
+<h3 style="font-size:36px;font-weight:700;color:#F4C95D">C'est réussi quand</h3>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">après approbation, la production affiche la version 1.0.&lt;build&gt;</p></div>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">avec l'erreur de Tom, le build échoue et la production garde sa version</p></div>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">après correction, la nouvelle version arrive en production</p></div>
+</div>
+</div>
+<aside>Énoncé : tp/07-deploiement/README.md. Correction : solutions/07-deploiement/. L'incident de l'étape 3 : dans application-prod.properties, maximum-pool-size=2O, avec la lettre O au lieu d'un zéro. Le fichier ne s'applique qu'avec le profil prod : tous les tests passent, la production ne démarre pas (docker logs embarq-prod-app-1), le rollback remet l'ancienne version. Vérifier sur http://localhost:8082/actuator/info. Bonus : un test @ActiveProfiles("prod") aurait vu la coquille dès les tests d'intégration.</aside>
+</section>

@@ -1,0 +1,28 @@
+<section id="c6-tp" data-transition="fade" style="background:#1F4E5A;color:#F2EFE9;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:grid;grid-template-columns:560px 1fr;gap:72px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<x-icon name="Wrench" style="color:#F4C95D;width:72px;height:72px"></x-icon>
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F4C95D">À vous de jouer</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:96px;font-weight:700;line-height:1.0;color:#F2EFE9">TP 06</h2>
+<p style="font-family:'Bitter', Georgia, serif;font-size:42px;line-height:1.2;color:#F2EFE9">Documenter et maintenir les tests</p>
+<p style="font-size:29px;line-height:1.35;color:#B9C7C9">1 h 05 · 13h15 – 14h20</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:25px;color:#1F4E5A;background:#F2EFE9;padding:10px 20px;border-radius:12px;align-self:flex-start">tp-06-documentation</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<h3 style="font-size:36px;font-weight:700;color:#F4C95D">Vous allez</h3>
+<ul style="font-size:28px;line-height:1.4;color:#F2EFE9">
+<li>diagnostiquer les tests end-to-end cassés par la charte de Brume</li>
+<li>poser des data-testid dans les pages, et les utiliser dans les Page Objects</li>
+<li>documenter les cas CT-E2E et les relier aux tests par @DisplayName</li>
+<li>écrire docs/tests.md : lancer les tests, lire les résultats</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#173E48;border-radius:18px;padding:28px">
+<h3 style="font-size:36px;font-weight:700;color:#F4C95D">C'est réussi quand</h3>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">le pipeline repasse au vert, avec la nouvelle charte</p></div>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">dans Jenkins, les tests portent des noms en CT-…</p></div>
+<div style="display:flex;gap:16px;align-items:center"><x-icon name="CheckCircle" style="color:#F4C95D;width:38px;height:38px"></x-icon><p style="font-size:27px;line-height:1.3;color:#F2EFE9">Tom peut lancer les tests en suivant docs/tests.md</p></div>
+</div>
+</div>
+<aside>Énoncé : tp/06-documentation/README.md. Correction : solutions/06-documentation/. Le premier push de la branche est rouge : c'est voulu. Le diagnostic passe par git log et git show sur embarq/src/main/resources/templates. Question 2 : aucun fichier ReservationE2E n'est concerné, parce que les tests n'utilisent que les Page Objects. Dans GitLab, les pages Markdown de embarq/docs/ sont mises en forme.</aside>
+</section>

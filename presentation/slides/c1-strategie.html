@@ -1,0 +1,17 @@
+<section id="c1-strategie" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 1 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Une stratégie de test part des risques</h2>
+<div style="display:flex;align-items:center;gap:16px">
+<p style="font-family:'Source Sans 3', Arial, sans-serif;font-size:26px;background:#102A2E;color:#F2EFE9;padding:10px 18px;border-radius:12px">Risque</p><x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape><p style="font-family:'Source Sans 3', Arial, sans-serif;font-size:26px;background:#2E8B8B;color:#F2EFE9;padding:10px 18px;border-radius:12px">Type de test</p><x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape><p style="font-family:'Source Sans 3', Arial, sans-serif;font-size:26px;background:#2E8B8B;color:#F2EFE9;padding:10px 18px;border-radius:12px">Outil</p><x-shape kind="arrow-right" style="background:#D7263D;width:40px;height:24px"></x-shape><p style="font-family:'Source Sans 3', Arial, sans-serif;font-size:26px;background:#1F4E5A;color:#F2EFE9;padding:10px 18px;border-radius:12px">Étage du pipeline</p>
+</div>
+<table style="font-size:23px;table-layout:fixed;color:#1A2326">
+<tr><th style="width:38%;background:#102A2E;color:#F2EFE9">Risque pour Iroise Traversées</th><th style="width:21%;background:#102A2E;color:#F2EFE9">Type de test</th><th style="width:18%;background:#102A2E;color:#F2EFE9">Outil</th><th style="width:23%;background:#102A2E;color:#F2EFE9">Étage du pipeline</th></tr>
+<tr style="background:#D9EBEA"><td>Un mauvais prix (le tarif de groupe)</td><td>Unitaire, paramétré</td><td>JUnit 5</td><td>Tests unitaires</td></tr>
+<tr><td>Plus de passagers que de places</td><td>Intégration</td><td>Testcontainers</td><td>Tests d'intégration</td></tr>
+<tr><td>Le site s'effondre le 1er avril</td><td>Performance</td><td>k6</td><td>Préproduction</td></tr>
+<tr><td>Une règle métier mal comprise</td><td>Scénarios BDD</td><td>Cucumber</td><td>Tests unitaires</td></tr>
+<tr><td>Le parcours de réservation cassé</td><td>End-to-end</td><td>Selenium</td><td>Tests end-to-end</td></tr>
+<tr><td>La mauvaise version en production</td><td>Smoke test</td><td>smoke-test.sh</td><td>Préprod, production</td></tr>
+</table>
+<aside>C'est la partie A du TP 01 : la matrice des risques d'Embarq (embarq/docs/strategie-de-test.md). Quoi tester, à quel niveau, avec quel outil, à quel moment. On ne teste pas tout de bout en bout : on choisit le niveau le moins cher qui couvre le risque. Le test de charge en préproduction est un bonus du TP 07. La ligne surlignée est le sujet du TP 01.</aside>
+</section>
