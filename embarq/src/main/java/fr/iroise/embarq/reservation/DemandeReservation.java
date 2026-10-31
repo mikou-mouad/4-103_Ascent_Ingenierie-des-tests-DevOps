@@ -11,5 +11,11 @@ public record DemandeReservation(
         @NotBlank(message = "L'adresse e-mail est obligatoire") @Email(message = "Adresse e-mail invalide") String email,
         @Min(value = 1, message = "Au moins un adulte par réservation") @Max(value = 30, message = "30 adultes au maximum") int adultes,
         @Min(value = 0, message = "Nombre d'enfants invalide") @Max(value = 30, message = "30 enfants au maximum") int enfants,
-        @Min(value = 0, message = "Nombre de vélos invalide") @Max(value = 10, message = "10 vélos au maximum") int velos) {
+        @Min(value = 0, message = "Nombre de vélos invalide") @Max(value = 10, message = "10 vélos au maximum") int velos,
+        /** Passagers résidents des îles, sur présentation de leur carte. Absent (ancienne application mobile) : non. */
+        Boolean resident) {
+
+    public DemandeReservation {
+        resident = Boolean.TRUE.equals(resident);
+    }
 }

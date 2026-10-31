@@ -41,7 +41,7 @@ class ReservationServiceTest {
         when(reservations.placesReservees(any())).thenReturn(4L);
         when(reservations.save(any())).thenAnswer(appel -> appel.getArgument(0));
 
-        Reservation reservation = service.reserver(7L, new DemandeReservation("Le Gall", "legall@example.org", 2, 1, 0));
+        Reservation reservation = service.reserver(7L, new DemandeReservation("Le Gall", "legall@example.org", 2, 1, 0, false));
 
         assertThat(reservation.getPassagers()).isEqualTo(3);
         assertThat(reservation.getMontant()).isEqualByComparingTo("90.00");
@@ -52,7 +52,7 @@ class ReservationServiceTest {
     void reservation_refusee_quand_la_traversee_est_complete() {
         when(reservations.placesReservees(any())).thenReturn(12L);
 
-        assertThatThrownBy(() -> service.reserver(7L, new DemandeReservation("Le Gall", "legall@example.org", 1, 0, 0)))
+        assertThatThrownBy(() -> service.reserver(7L, new DemandeReservation("Le Gall", "legall@example.org", 1, 0, 0, false)))
                 .isInstanceOf(TraverseeComplete.class);
         verify(reservations, never()).save(any());
     }
@@ -62,7 +62,7 @@ class ReservationServiceTest {
         // Le mock affirme que 10 places sont vendues : le test ne vérifie pas comment on les compte
         when(reservations.placesReservees(any())).thenReturn(10L);
 
-        assertThatThrownBy(() -> service.reserver(7L, new DemandeReservation("Kerbrat", "kerbrat@example.org", 1, 2, 0)))
+        assertThatThrownBy(() -> service.reserver(7L, new DemandeReservation("Kerbrat", "kerbrat@example.org", 1, 2, 0, false)))
                 .isInstanceOf(TraverseeComplete.class)
                 .hasMessageContaining("2 place(s)");
         verify(reservations, never()).save(any());

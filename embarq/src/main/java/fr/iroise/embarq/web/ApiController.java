@@ -64,8 +64,9 @@ public class ApiController {
 
     @GetMapping("/tarifs")
     public Map<String, BigDecimal> tarif(@RequestParam int adultes, @RequestParam(defaultValue = "0") int enfants,
-                                         @RequestParam(defaultValue = "0") int velos) {
-        return Map.of("montant", tarifs.calculer(adultes, enfants, velos));
+                                         @RequestParam(defaultValue = "0") int velos,
+                                         @RequestParam(defaultValue = "false") boolean resident) {
+        return Map.of("montant", tarifs.calculer(adultes, enfants, velos, resident));
     }
 
     @ExceptionHandler(TraverseeComplete.class)

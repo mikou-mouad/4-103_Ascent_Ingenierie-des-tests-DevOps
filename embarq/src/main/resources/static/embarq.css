@@ -133,3 +133,10 @@ footer {
   padding: 24px;
   font-size: 0.9rem;
 }
+
+.case {
+  font-weight: 400;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

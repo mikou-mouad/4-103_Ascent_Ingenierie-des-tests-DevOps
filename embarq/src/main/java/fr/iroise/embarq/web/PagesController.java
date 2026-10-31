@@ -32,7 +32,7 @@ public class PagesController {
     @GetMapping("/traversees/{id}/reservation")
     public String formulaire(@PathVariable Long id, Model model) {
         model.addAttribute("traversee", service.traversee(id));
-        model.addAttribute("demande", new DemandeReservation("", "", 1, 0, 0));
+        model.addAttribute("demande", new DemandeReservation("", "", 1, 0, 0, false));
         return "reserver";
     }
 

@@ -49,6 +49,8 @@
     <p class="erreur-champ" th:if="${#fields.hasErrors('enfants')}" th:errors="*{enfants}"></p>
     <p class="erreur-champ" th:if="${#fields.hasErrors('velos')}" th:errors="*{velos}"></p>
 
+    <label class="case"><input id="resident" type="checkbox" th:field="*{resident}"> Résident des îles (carte à présenter à l'embarquement)</label>
+
     <button id="valider" type="submit" class="bouton">Valider la réservation</button>
   </form>
 </main>

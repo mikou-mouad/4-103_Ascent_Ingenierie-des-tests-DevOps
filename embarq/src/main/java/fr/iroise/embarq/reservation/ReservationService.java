@@ -47,7 +47,7 @@ public class ReservationService {
         if (passagers > restantes) {
             throw new TraverseeComplete(Math.max(restantes, 0));
         }
-        BigDecimal montant = tarifs.calculer(demande.adultes(), demande.enfants(), demande.velos());
+        BigDecimal montant = tarifs.calculer(demande.adultes(), demande.enfants(), demande.velos(), demande.resident());
         Reservation reservation = new Reservation(generateur.nouvelleReference(), traversee,
                 demande.nom(), demande.email(), demande.adultes(), demande.enfants(), demande.velos(), montant);
         return reservations.save(reservation);

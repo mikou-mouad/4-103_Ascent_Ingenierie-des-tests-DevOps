@@ -32,4 +32,13 @@ public class TarifService {
         BigDecimal total = passagers.add(VELO.multiply(BigDecimal.valueOf(velos)));
         return total.setScale(2, RoundingMode.HALF_UP);
     }
+
+    /** Tarif résident des îles (Molène, Ouessant) : moitié prix, d'après l'appel de Maëlle. */
+    public BigDecimal calculer(int adultes, int enfants, int velos, boolean resident) {
+        BigDecimal total = calculer(adultes, enfants, velos);
+        if (resident) {
+            total = total.multiply(new BigDecimal("0.50"));
+        }
+        return total.setScale(2, RoundingMode.HALF_UP);
+    }
 }
