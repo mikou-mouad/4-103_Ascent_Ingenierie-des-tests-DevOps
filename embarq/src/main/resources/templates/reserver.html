@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réserver – Iroise Traversées</title>
+  <link rel="stylesheet" href="/embarq.css">
+</head>
+<body>
+<header>
+  <a href="/" class="marque">Iroise Traversées</a>
+  <span class="slogan">Brest · Le Conquet · Molène · Ouessant</span>
+</header>
+
+<main>
+  <h1 th:text="|${traversee.traversee().depart} → ${traversee.traversee().arrivee}|">Brest → Ouessant</h1>
+  <p class="detail">
+    <span th:text="${#temporals.format(traversee.traversee().dateHeure, 'EEEE d MMMM, HH:mm')}">lundi 1 avril, 08:30</span>
+    · <span th:text="${traversee.traversee().navire}">Fromveur II</span>
+    · <span id="places-restantes" th:text="|${traversee.placesRestantes()} places restantes|">280 places restantes</span>
+  </p>
+
+  <p th:if="${erreur}" id="erreur" class="erreur" th:text="${erreur}">Cette traversée est complète.</p>
+
+  <form method="post" th:action="@{/traversees/{id}/reservation(id=${traversee.traversee().id})}" th:object="${demande}">
+    <label for="nom">Nom</label>
+    <input id="nom" type="text" th:field="*{nom}">
+    <p class="erreur-champ" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></p>
+
+    <label for="email">E-mail</label>
+    <input id="email" type="text" th:field="*{email}">
+    <p class="erreur-champ" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+    <div class="ligne">
+      <div>
+        <label for="adultes">Adultes</label>
+        <input id="adultes" type="number" min="1" th:field="*{adultes}">
+      </div>
+      <div>
+        <label for="enfants">Enfants (4 à 11 ans)</label>
+        <input id="enfants" type="number" min="0" th:field="*{enfants}">
+      </div>
+      <div>
+        <label for="velos">Vélos</label>
+        <input id="velos" type="number" min="0" th:field="*{velos}">
+      </div>
+    </div>
+    <p class="erreur-champ" th:if="${#fields.hasErrors('adultes')}" th:errors="*{adultes}"></p>
+    <p class="erreur-champ" th:if="${#fields.hasErrors('enfants')}" th:errors="*{enfants}"></p>
+    <p class="erreur-champ" th:if="${#fields.hasErrors('velos')}" th:errors="*{velos}"></p>
+
+    <button id="valider" type="submit" class="bouton">Valider la réservation</button>
+  </form>
+</main>
+
+<footer id="version" th:text="|Embarq ${version} · ${environnement}|">Embarq dev · local</footer>
+</body>
+</html>

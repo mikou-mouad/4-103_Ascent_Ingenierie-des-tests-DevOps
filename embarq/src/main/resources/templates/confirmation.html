@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réservation confirmée – Iroise Traversées</title>
+  <link rel="stylesheet" href="/embarq.css">
+</head>
+<body>
+<header>
+  <a href="/" class="marque">Iroise Traversées</a>
+  <span class="slogan">Brest · Le Conquet · Molène · Ouessant</span>
+</header>
+
+<main th:with="t=${reservation.traversee}">
+  <h1>Bon voyage !</h1>
+  <p>Votre réservation est <strong id="statut" th:text="${reservation.statut.name() == 'CONFIRMEE'} ? 'confirmée' : 'annulée'">confirmée</strong>.</p>
+
+  <dl class="recapitulatif">
+    <dt>Référence</dt>
+    <dd id="reference" th:text="${reservation.reference}">IR-482</dd>
+    <dt>Traversée</dt>
+    <dd th:text="|${t.depart} → ${t.arrivee}, ${#temporals.format(t.dateHeure, 'EEEE d MMMM, HH:mm')}|">Brest → Ouessant</dd>
+    <dt>Passagers</dt>
+    <dd id="passagers" th:text="|${reservation.adultes} adulte(s), ${reservation.enfants} enfant(s), ${reservation.velos} vélo(s)|">2 adulte(s)</dd>
+    <dt>Montant</dt>
+    <dd id="montant" th:text="|${#numbers.formatDecimal(reservation.montant, 1, 2, 'COMMA')} €|">72,00 €</dd>
+  </dl>
+
+  <p>Présentez votre référence à l'embarquement, 30 minutes avant le départ.</p>
+  <a href="/" class="bouton">Retour aux traversées</a>
+</main>
+
+<footer id="version" th:text="|Embarq ${version} · ${environnement}|">Embarq dev · local</footer>
+</body>
+</html>

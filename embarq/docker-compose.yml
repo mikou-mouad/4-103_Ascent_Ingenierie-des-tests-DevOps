@@ -1,0 +1,48 @@
+# Un environnement d'Embarq : l'application et sa base PostgreSQL.
+# Un projet Compose par environnement, paramétré par deploy/<environnement>.env :
+#   VERSION=1.0.0-12 docker compose -p embarq-preprod --env-file deploy/preprod.env up -d
+# Le plus simple : bash deploy/deployer.sh preprod 1.0.0-12
+services:
+  app:
+    image: embarq:${VERSION:-local}
+    restart: unless-stopped
+    environment:
+      ENVIRONNEMENT: ${ENVIRONNEMENT:?environnement absent}
+      EMBARQ_VERSION: ${VERSION:-local}
+      # Profil Spring = environnement : application-<environnement>.properties s'il existe
+      SPRING_PROFILES_ACTIVE: ${ENVIRONNEMENT}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/embarq
+      SPRING_DATASOURCE_USERNAME: embarq
+      SPRING_DATASOURCE_PASSWORD: embarq
+    ports:
+      - "${EMBARQ_PORT:?port absent}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      default:
+      lab:
+        # Nom de l'application pour Jenkins et Selenium : embarq-e2e, embarq-preprod, embarq-prod
+        aliases:
+          - embarq-${ENVIRONNEMENT}
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: embarq
+      POSTGRES_USER: embarq
+      POSTGRES_PASSWORD: embarq
+    volumes:
+      - donnees:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U embarq -d embarq"]
+      interval: 5s
+      retries: 12
+
+networks:
+  lab:
+    external: true
+
+volumes:
+  donnees:

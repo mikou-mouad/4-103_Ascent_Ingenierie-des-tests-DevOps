@@ -1,0 +1,24 @@
+<section id="c7-pipeline" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 7 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Build once, deploy many</h2>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', monospace;font-size:24px;color:#F2EFE9;background:#102A2E;border-radius:12px;padding:12px 22px;text-align:center">une seule image : <span style="color:#F4C95D">embarq:1.0.&lt;numéro du build&gt;</span>, construite une fois</p>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#D9EBEA;border-radius:14px;padding:18px 18px"><p style="font-size:26px;font-weight:700;color:#1A2326">Image Docker</p><p style="font-size:21px;line-height:1.3;color:#55616A">construite après les tests</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:36px;height:22px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#2E8B8B;border-radius:14px;padding:18px 18px"><p style="font-size:26px;font-weight:700;color:#F2EFE9">e2e</p><p style="font-size:21px;line-height:1.3;color:#F2EFE9">tests Selenium · détruit après le build</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:36px;height:22px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#2E8B8B;border-radius:14px;padding:18px 18px"><p style="font-size:26px;font-weight:700;color:#F2EFE9">Préproduction</p><p style="font-size:21px;line-height:1.3;color:#F2EFE9">déploiement · smoke tests</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:36px;height:22px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#D7263D;border-radius:14px;padding:18px 18px"><p style="font-size:26px;font-weight:700;color:#F2EFE9">Approbation</p><p style="font-size:21px;line-height:1.3;color:#F2EFE9">un humain, un bouton · 15 min max</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:36px;height:22px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#1F4E5A;border-radius:14px;padding:18px 18px"><p style="font-size:26px;font-weight:700;color:#F2EFE9">Production</p><p style="font-size:21px;line-height:1.3;color:#B9C7C9">déploiement · smoke tests · rollback</p></div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="CheckCircle" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Ce qui est testé part</h3></div><p style="font-size:24px;line-height:1.38;color:#55616A">On ne reconstruit jamais entre deux environnements : la production reçoit l'image testée en e2e et en préprod.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="Settings" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Un environnement, une configuration</h3></div><p style="font-size:24px;line-height:1.38;color:#55616A">Même image, profil Spring différent (SPRING_PROFILES_ACTIVE) : e2e, preprod, prod.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="Cloud" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Livraison ou déploiement continu ?</h3></div><p style="font-size:24px;line-height:1.38;color:#55616A">L'approbation est la seule différence. Sans elle, chaque build vert part en production.</p></div>
+</div>
+<aside>Dans le Jenkinsfile final : Image Docker, Environnement e2e, Tests end-to-end, Préproduction (deployer.sh preprod puis smoke-test.sh), Approbation (input dans un timeout de 15 minutes), Production. L'environnement e2e est neuf à chaque build ; preprod et prod gardent leurs données. Préprod : http://localhost:8081, prod : http://localhost:8082 ; la version s'affiche en bas de la page. Pendant l'approbation, le job GitLab attend, lui aussi.</aside>
+</section>

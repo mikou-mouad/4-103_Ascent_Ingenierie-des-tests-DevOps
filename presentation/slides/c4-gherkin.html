@@ -1,0 +1,14 @@
+<section id="c4-gherkin" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 4 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Gherkin : des règles qu'on exécute, en français</h2>
+<div style="display:flex;gap:36px;align-items:stretch">
+<div style="width:900px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:23px;line-height:1.5;color:#F2EFE9;white-space:nowrap"><span style="color:#F4C95D"># language: fr</span><br><span style="color:#8FD3D3">Fonctionnalité:</span> Prix d'une traversée<br><br>&#160;&#160;<span style="color:#8FD3D3">Règle:</span> Tarif résident des îles<br><br>&#160;&#160;&#160;&#160;<span style="color:#8FD3D3">Contexte:</span><br>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color:#F4C95D">Étant donné</span> des passagers résidents des îles<br><br>&#160;&#160;&#160;&#160;<span style="color:#8FD3D3">Scénario:</span> Un adulte résident paie 9 €<br>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color:#F4C95D">Quand</span> je réserve pour 1 adulte, 0 enfant et 0 vélo<br>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color:#F4C95D">Alors</span> le prix est de 9,00 €</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:26px;line-height:1.4;color:#55616A"><b style="color:#1A2326">Étant donné</b> le contexte, <b style="color:#1A2326">Quand</b> l'action, <b style="color:#1A2326">Alors</b> le résultat attendu.</p>
+<p style="font-size:26px;line-height:1.4;color:#55616A">Chaque phrase est reliée à une méthode Java par une expression Cucumber :</p>
+<p style="font-family:'JetBrains Mono', monospace;font-size:19px;line-height:1.5;background:#E4E0D8;border-radius:12px;padding:16px 18px;color:#1A2326">@Quand("je réserve pour<br>&#160;{int} adulte(s), {int} enfant(s)<br>&#160;et {int} vélo(s)")</p>
+<p style="font-size:26px;line-height:1.4;color:#55616A">Maëlle lit le scénario. <b style="color:#1A2326">La machine le vérifie.</b></p>
+</div>
+</div>
+<aside>Extrait réel de embarq/src/test/resources/features/tarifs.feature. Le fichier du TP contient aussi la règle du tarif normal, en Plan du scénario avec un tableau d'Exemples. Dans TarifsSteps : {int} capture un nombre, {bigdecimal} un montant avec une virgule (le fichier est en français), adulte(s) accepte le singulier et le pluriel. Si Cucumber écrit « The step … is undefined », la phrase ne correspond à aucune expression : comparer mot à mot.</aside>
+</section>

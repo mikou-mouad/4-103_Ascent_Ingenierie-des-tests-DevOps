@@ -1,0 +1,43 @@
+// Pipeline d'Embarq, exécuté par le Jenkins du lab.
+// Il est lancé par GitLab CI/CD à chaque push : voir .gitlab-ci.yml et embarq/ci/declencher-jenkins.sh.
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Compilation') {
+            steps {
+                dir('embarq') {
+                    sh 'mvn -B compile'
+                }
+            }
+        }
+
+        stage('Tests unitaires') {
+            steps {
+                dir('embarq') {
+                    sh 'mvn -B test'
+                }
+            }
+            post {
+                always {
+                    junit 'embarq/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        stage('Paquet') {
+            steps {
+                dir('embarq') {
+                    sh 'mvn -B package -DskipTests'
+                }
+                archiveArtifacts artifacts: 'embarq/target/embarq.jar', fingerprint: true
+            }
+        }
+    }
+}

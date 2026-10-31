@@ -1,0 +1,20 @@
+<section id="c2-mock" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 2 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Ce qu'un mock ne voit pas</h2>
+<div style="display:flex;gap:40px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#E4E0D8;border-radius:16px;padding:22px 26px">
+<p style="font-size:22px;font-weight:700;color:#D7263D">TEST UNITAIRE · ReservationServiceTest</p>
+<div style="display:flex;align-items:center;gap:12px"><p style="font-family:'JetBrains Mono', monospace;font-size:20px;background:#FAF8F4;color:#1A2326;padding:10px 18px;border-radius:12px">ReservationService</p><x-shape kind="arrow-right" style="background:#D7263D;width:36px;height:22px"></x-shape><p style="font-family:'JetBrains Mono', monospace;font-size:20px;color:#D7263D;border:3px dashed #D7263D;border-radius:12px;padding:8px 14px">mock : « 10 places »</p></div>
+<p style="font-size:23px;color:#55616A">La requête SQL n'est jamais exécutée.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#D9EBEA;border-radius:16px;padding:22px 26px">
+<p style="font-size:22px;font-weight:700;color:#2E8B8B">TEST D'INTÉGRATION · ReservationRepositoryIT</p>
+<div style="display:flex;align-items:center;gap:12px"><p style="font-family:'JetBrains Mono', monospace;font-size:20px;background:#FAF8F4;color:#1A2326;padding:10px 18px;border-radius:12px">ReservationRepository</p><x-shape kind="arrow-right" style="background:#2E8B8B;width:36px;height:22px"></x-shape><p style="font-family:'JetBrains Mono', monospace;font-size:20px;background:#1F4E5A;color:#F2EFE9;padding:10px 18px;border-radius:12px">PostgreSQL 17</p></div>
+<p style="font-size:23px;color:#55616A">La vraie requête, sur une vraie base, dans Docker.</p>
+</div>
+</div>
+<div style="width:830px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:23px;line-height:1.5;color:#F2EFE9;white-space:nowrap">@DataJpaTest<br>@Testcontainers<br>class ReservationRepositoryIT {<br><br>&#160;&#160;&#160;&#160;@Container<br>&#160;&#160;&#160;&#160;<span style="color:#F4C95D">@ServiceConnection</span><br>&#160;&#160;&#160;&#160;static PostgreSQLContainer postgres =<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;new PostgreSQLContainer(<span style="color:#8FD3D3">"postgres:17-alpine"</span>);<br><br>&#160;&#160;&#160;&#160;<span style="color:#7F9496">// placesReservees() interrogé pour de vrai</span><br>}</p></div>
+</div>
+<aside>@DataJpaTest démarre seulement la couche base de données de Spring (entités, dépôts, Flyway). @Testcontainers et @Container démarrent PostgreSQL 17 dans Docker pour la durée des tests. @ServiceConnection branche Spring sur ce conteneur, sans configuration. Les tests *IT sont lancés par failsafe à l'étape verify, après les tests unitaires. Pourquoi pas H2 en mémoire ? Ce n'est pas la base de production : une requête peut s'y comporter autrement. Dans le vrai fichier, il y a aussi @AutoConfigureTestDatabase(replace = NONE).</aside>
+</section>

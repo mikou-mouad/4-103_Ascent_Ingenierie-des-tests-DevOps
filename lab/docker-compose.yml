@@ -1,0 +1,56 @@
+# Le lab de la formation, décrit comme du code : Jenkins et une Selenium Grid.
+# Avant le premier lancement : cp .env.exemple .env, puis compléter .env (voir le TP 00).
+#   docker compose up -d --build
+name: lab
+
+services:
+  jenkins:
+    build: ./jenkins
+    image: lab-jenkins
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      JENKINS_ADMIN_ID: ${JENKINS_ADMIN_ID:-admin}
+      JENKINS_ADMIN_PASSWORD: ${JENKINS_ADMIN_PASSWORD:?mot de passe absent dans lab/.env}
+      GITLAB_PROJET: ${GITLAB_PROJET:?adresse du projet gitlab.com absente dans lab/.env}
+      # Les tests d'intégration (Testcontainers) lancent leurs conteneurs sur le Docker de la machine
+      TESTCONTAINERS_HOST_OVERRIDE: host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    group_add:
+      - "${DOCKER_GID:?groupe docker absent dans lab/.env}"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Les dépendances Maven déjà téléchargées sur la machine servent aussi à Jenkins
+      - ${HOME}/.m2:/var/jenkins_home/.m2
+    networks:
+      - lab
+
+  selenium:
+    image: selenium/standalone-chrome:155.0-chromedriver-155.0-grid-4.51.0-20261010
+    container_name: selenium
+    restart: unless-stopped
+    shm_size: 2gb
+    ports:
+      - "4444:4444"   # la Grid, pour les tests
+      - "7900:7900"   # le bureau du navigateur, pour regarder les tests : http://localhost:7900
+    environment:
+      SE_VNC_NO_PASSWORD: "true"
+      SE_NODE_MAX_SESSIONS: "2"
+      SE_NODE_OVERRIDE_MAX_SESSIONS: "true"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - lab
+
+networks:
+  # Réseau partagé avec les environnements d'Embarq (dev, e2e, preprod, prod),
+  # créé une fois pour toutes avec : docker network create lab
+  lab:
+    external: true
+
+volumes:
+  jenkins_home:

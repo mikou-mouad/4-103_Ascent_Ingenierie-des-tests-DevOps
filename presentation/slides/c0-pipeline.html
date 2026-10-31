@@ -1,0 +1,21 @@
+<section id="c0-pipeline" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 0 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">Anatomie du pipeline d'Embarq</h2>
+<div style="display:flex;align-items:center;gap:16px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#102A2E;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#F2EFE9">.gitlab-ci.yml</p><p style="font-size:22px;line-height:1.3;color:#B9C7C9">GitLab : un job « jenkins », pour le runner taggé embarq</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:44px;height:26px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#102A2E;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#F2EFE9">declencher-jenkins.sh</p><p style="font-size:22px;line-height:1.3;color:#B9C7C9">lance le job Jenkins, recopie sa console, reprend son résultat</p></div>
+<x-shape kind="arrow-right" style="background:#D7263D;width:44px;height:26px"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#1F4E5A;border-radius:14px;padding:18px 20px"><p style="font-size:27px;font-weight:700;color:#F2EFE9">Jenkinsfile</p><p style="font-size:22px;line-height:1.3;color:#B9C7C9">les étapes : compiler, tester, construire</p></div>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="width:760px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:23px;line-height:1.5;color:#F2EFE9;white-space:nowrap"><span style="color:#7F9496"># .gitlab-ci.yml</span><br>jenkins:<br>&#160;&#160;stage: jenkins<br>&#160;&#160;tags:<br>&#160;&#160;&#160;&#160;- <span style="color:#F4C95D">embarq</span>       <span style="color:#7F9496"># le runner de votre machine</span><br>&#160;&#160;script:<br>&#160;&#160;&#160;&#160;- bash embarq/ci/declencher-jenkins.sh</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:23px;font-weight:700;color:#2E8B8B">LES ÉTAPES DU JENKINSFILE, AU TP 00</p>
+<div style="display:flex;gap:18px;align-items:center;background:#E4E0D8;border-radius:12px;padding:14px 20px"><p style="width:230px;font-size:26px;font-weight:700">Compilation</p><p style="font-family:'JetBrains Mono', monospace;font-size:21px;color:#55616A">mvn -B compile</p></div>
+<div style="display:flex;gap:18px;align-items:center;background:#E4E0D8;border-radius:12px;padding:14px 20px"><p style="width:230px;font-size:26px;font-weight:700">Tests unitaires</p><p style="font-family:'JetBrains Mono', monospace;font-size:21px;color:#55616A">mvn -B test · rapport junit</p></div>
+<div style="display:flex;gap:18px;align-items:center;background:#E4E0D8;border-radius:12px;padding:14px 20px"><p style="width:230px;font-size:26px;font-weight:700">Paquet</p><p style="font-family:'JetBrains Mono', monospace;font-size:21px;color:#55616A">embarq.jar, archivé</p></div>
+</div>
+</div>
+<aside>GitLab reste la porte d'entrée, comme dans l'environnement réel des participants ; Jenkins fait le travail. Le job GitLab est exécuté par le GitLab Runner de la machine (exécuteur shell, tag embarq) ; il appelle l'API de Jenkins avec les variables GitLab JENKINS_USER et JENKINS_TOKEN, recopie la console, et échoue si Jenkins ne finit pas en SUCCESS. C'est l'étude de cas du TP 00 : ce que ce pipeline vérifie, ce qu'il ne vérifie pas, combien de temps il prend.</aside>
+</section>

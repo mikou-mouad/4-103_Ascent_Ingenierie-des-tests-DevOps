@@ -1,0 +1,122 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-31T12:00:00Z"
+  },
+  "lists": "css",
+  "title": "Ingénierie des tests DevOps : l'histoire d'Iroise Traversées",
+  "cover": "cover",
+  "order": [
+    "cover",
+    "iroise",
+    "personnages",
+    "principe",
+    "programme",
+    "branches",
+    "lab",
+    "j1-debut",
+    "c0-incident",
+    "c0-solution",
+    "c0-cicd",
+    "c0-pipeline",
+    "c0-tp",
+    "pause-j1-matin",
+    "c1-incident",
+    "c1-types",
+    "c1-pyramide",
+    "c1-strategie",
+    "c1-tp",
+    "dej-j1",
+    "c2-incident",
+    "c2-mock",
+    "c2-perf",
+    "c2-tp",
+    "c3-incident",
+    "c3-culture",
+    "c3-indicateurs",
+    "c3-tp",
+    "pause-j1-aprem",
+    "fin-j1",
+    "j2-debut",
+    "c4-incident",
+    "c4-outils",
+    "c4-shiftleft",
+    "c4-gherkin",
+    "c4-tp",
+    "pause-j2-matin",
+    "c5-incident",
+    "c5-webdriver",
+    "c5-pageobject",
+    "c5-tp",
+    "dej-j2",
+    "c6-incident",
+    "c6-cas-de-test",
+    "c6-maintenance",
+    "c6-tp",
+    "c7-incident",
+    "c7-pipeline",
+    "c7-rollback",
+    "pause-j2-aprem",
+    "c7-tp",
+    "epilogue",
+    "fin"
+  ],
+  "sections": {
+    "intro": {
+      "description": "Iroise Traversées, ses personnages, le déroulé, les branches et le lab",
+      "start": "cover"
+    },
+    "ch0": {
+      "description": "Chapitre 0 : CI, CD, infrastructure as code, anatomie du pipeline",
+      "start": "j1-debut"
+    },
+    "ch1": {
+      "description": "Chapitre 1 : types de tests, pyramide, stratégie, tests unitaires",
+      "start": "c1-incident"
+    },
+    "ch2": {
+      "description": "Chapitre 2 : tests d'intégration (Testcontainers) et de performance (k6)",
+      "start": "c2-incident"
+    },
+    "ch3": {
+      "description": "Chapitre 3 : culture qualité, couverture, tests instables, indicateurs, quality gate",
+      "start": "c3-incident"
+    },
+    "ch4": {
+      "description": "Chapitre 4 : outils, shift-left, BDD et Cucumber",
+      "start": "j2-debut"
+    },
+    "ch5": {
+      "description": "Chapitre 5 : Selenium WebDriver, Selenium Grid, Page Object",
+      "start": "c5-incident"
+    },
+    "ch6": {
+      "description": "Chapitre 6 : documenter et maintenir les tests",
+      "start": "c6-incident"
+    },
+    "ch7": {
+      "description": "Chapitre 7 : déploiement continu, smoke tests, approbation, rollback",
+      "start": "c7-incident"
+    },
+    "fin": {
+      "description": "Épilogue et bilan",
+      "start": "epilogue"
+    }
+  },
+  "faces": {
+    "bitter": {
+      "family": "Bitter",
+      "href": "https://fonts.googleapis.com/css2?family=Bitter:wght@400..800&display=swap"
+    },
+    "source-sans-3": {
+      "family": "Source Sans 3",
+      "href": "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..700&display=swap"
+    },
+    "jetbrains-mono": {
+      "family": "JetBrains Mono",
+      "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+    }
+  },
+  "designSystems": []
+}

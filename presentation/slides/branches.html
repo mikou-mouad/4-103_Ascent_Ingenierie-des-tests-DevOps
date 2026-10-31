@@ -1,0 +1,23 @@
+<section id="branches" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#D7263D">Le dépôt des TP</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:64px;font-weight:700;line-height:1.1;color:#1A2326">Une branche par TP, chacune part de la précédente</h2>
+<div style="display:flex;gap:36px;align-items:start">
+<div style="flex:1">
+<table style="font-size:20px;table-layout:fixed;color:#1A2326">
+<tr><th style="width:44%;background:#102A2E;color:#F2EFE9">Branche</th><th style="width:56%;background:#102A2E;color:#F2EFE9">Ce qu'on y fait</th></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-00-pipeline</span></td><td>Le lab « as code », GitLab déclenche Jenkins</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-01-strategie</span></td><td>Stratégie de test, tests unitaires JUnit 5</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-02-integration</span></td><td>Testcontainers, test de charge k6</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-03-indicateurs</span></td><td>Couverture, quality gate, test instable</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-04-bdd</span></td><td>Shift-left et BDD avec Cucumber</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-05-selenium</span></td><td>Selenium WebDriver et Selenium Grid</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-06-documentation</span></td><td>Documentation et maintenance des tests</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp-07-deploiement</span></td><td>Préprod, smoke tests, production, rollback</td></tr>
+<tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">solution-finale</span></td><td>L'état final d'Embarq et de son pipeline</td></tr>
+</table>
+</div>
+<div style="width:780px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:23px;line-height:1.5;color:#F2EFE9;white-space:nowrap"><span style="color:#7F9496"># une fois, la veille (guide du lab)</span><br>git clone \<br>&#160;&#160;https://github.com/mikou-mouad/\<br>&#160;&#160;4-103_Ascent_Ingenierie-des-tests-DevOps.git \<br>&#160;&#160;~/iroise<br><br><span style="color:#7F9496"># au début de chaque TP</span><br>cd ~/iroise &amp;&amp; git fetch<br>git stash -u<br>git checkout <span style="color:#F4C95D">tp-03-indicateurs</span><br>git push gitlab HEAD</p></div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#55616A">Dans chaque branche : l'énoncé (<span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp/NN-*/</span>) et la correction (<span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">solutions/NN-*/</span>), sans rien du TP suivant.</p>
+<aside>git stash -u met de côté le travail du TP précédent, fichiers non suivis compris : rien n'est perdu. git push gitlab HEAD pousse la nouvelle branche dans le projet gitlab.com du participant : le pipeline GitLab → Jenkins construit le point de départ du TP. Un participant bloqué consulte la correction, ou repart de la branche du TP suivant. La remote gitlab est ajoutée au TP 00.</aside>
+</section>

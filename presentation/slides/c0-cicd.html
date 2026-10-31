@@ -1,0 +1,20 @@
+<section id="c0-cicd" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#2E8B8B">Chapitre 0 · Le concept</p>
+<h2 style="font-family:'Bitter', Georgia, serif;font-size:68px;font-weight:700;line-height:1.1;color:#1A2326">CI, livraison continue, déploiement continu</h2>
+<div style="display:flex;gap:28px;align-items:stretch">
+<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:22px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="Refresh" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Intégration continue</h3></div><p style="font-size:25px;line-height:1.38;color:#55616A">Chaque push est compilé et testé. Un problème est vu en minutes, pas en jours.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="CheckCircle" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Livraison continue</h3></div><p style="font-size:25px;line-height:1.38;color:#55616A">Chaque version est prête à partir. La mise en production reste une décision humaine : un bouton.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="Cloud" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Déploiement continu</h3></div><p style="font-size:25px;line-height:1.38;color:#55616A">Tout ce qui passe le pipeline part en production, sans intervention.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#E4E0D8;border-radius:16px;padding:24px"><div style="display:flex;gap:14px;align-items:center"><x-icon name="Code" style="color:#2E8B8B;width:42px;height:42px"></x-icon><h3 style="font-size:31px;font-weight:700">Infrastructure as code</h3></div><p style="font-size:25px;line-height:1.38;color:#55616A">Le lab, Jenkins et le pipeline sont des fichiers versionnés.</p><p style="font-family:'JetBrains Mono', monospace;font-size:19px;line-height:1.45;color:#2E8B8B">lab/docker-compose.yml<br>lab/jenkins/casc.yaml<br>embarq/Jenkinsfile</p></div>
+</div>
+<div style="width:500px;display:flex;flex-direction:column;gap:18px;background:#1F4E5A;border-radius:18px;padding:30px">
+<p style="font-size:24px;font-weight:700;color:#F4C95D">CE QUE DEVOPS CHANGE POUR LES TESTS</p>
+<p style="font-size:26px;line-height:1.4;color:#F2EFE9">Ils tournent à chaque changement, pas avant la livraison.</p>
+<p style="font-size:26px;line-height:1.4;color:#F2EFE9">Ils doivent être rapides, fiables, automatiques.</p>
+<p style="font-size:26px;line-height:1.4;color:#F2EFE9">Leur résultat est visible par tous.</p>
+<p style="font-size:26px;line-height:1.4;color:#F4C95D">Ils deviennent la porte de la production.</p>
+</div>
+</div>
+<aside>Question pour la salle : où en est Embarq aujourd'hui ? Nulle part : ni CI, ni livraison. À la fin du TP 07, Embarq sera en livraison continue (approbation humaine avant la production) ; passer au déploiement continu, c'est retirer le bouton. Infrastructure as code : au TP 00, personne ne clique pour créer le job Jenkins ni installer ses plugins (casc.yaml, plugins.txt).</aside>
+</section>
