@@ -1,5 +1,7 @@
 package fr.iroise.embarq.e2e;
 
+import static fr.iroise.embarq.e2e.TestId.testId;
+
 import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -17,35 +19,35 @@ public class PageReservation {
         this.navigateur = navigateur;
         // On attend que le formulaire soit affiché avant de s'en servir
         new WebDriverWait(navigateur, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("valider")));
+                .until(ExpectedConditions.visibilityOfElementLocated(testId("valider")));
     }
 
     public PageReservation saisir(String nom, String email, int adultes, int enfants, int velos) {
-        remplir(By.id("nom"), nom);
-        remplir(By.id("email"), email);
-        remplir(By.id("adultes"), String.valueOf(adultes));
-        remplir(By.id("enfants"), String.valueOf(enfants));
-        remplir(By.id("velos"), String.valueOf(velos));
+        remplir(testId("nom"), nom);
+        remplir(testId("email"), email);
+        remplir(testId("adultes"), String.valueOf(adultes));
+        remplir(testId("enfants"), String.valueOf(enfants));
+        remplir(testId("velos"), String.valueOf(velos));
         return this;
     }
 
     /** Valide un formulaire correct : on arrive sur la confirmation. */
     public PageConfirmation valider() {
-        navigateur.findElement(By.id("valider")).click();
+        navigateur.findElement(testId("valider")).click();
         return new PageConfirmation(navigateur);
     }
 
     /** Valide un formulaire incorrect : on reste sur le formulaire, avec des messages d'erreur. */
     public PageReservation validerSansSucces() {
-        navigateur.findElement(By.id("valider")).click();
+        navigateur.findElement(testId("valider")).click();
         new WebDriverWait(navigateur, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".erreur, .erreur-champ")));
+                .until(ExpectedConditions.presenceOfElementLocated(testId("erreur")));
         return this;
     }
 
     /** Les messages d'erreur affichés. */
     public List<String> erreurs() {
-        return navigateur.findElements(By.cssSelector(".erreur, .erreur-champ")).stream()
+        return navigateur.findElements(testId("erreur")).stream()
                 .map(WebElement::getText)
                 .toList();
     }

@@ -164,6 +164,12 @@
         <configuration>
           <skip>${tests.unitaires.ignores}</skip>
           <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar} -Xshare:off</argLine>
+          <!-- Rapports XML avec les noms lisibles (@DisplayName) : Jenkins affiche des phrases -->
+          <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
+            <usePhrasedTestSuiteClassName>true</usePhrasedTestSuiteClassName>
+            <usePhrasedTestCaseClassName>true</usePhrasedTestCaseClassName>
+            <usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
+          </statelessTestsetReporter>
         </configuration>
       </plugin>
 
@@ -175,6 +181,12 @@
           <includes>
             <include>${tests.failsafe}</include>
           </includes>
+          <!-- Rapports XML avec les noms lisibles (@DisplayName) : Jenkins affiche des phrases -->
+          <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
+            <usePhrasedTestSuiteClassName>true</usePhrasedTestSuiteClassName>
+            <usePhrasedTestCaseClassName>true</usePhrasedTestCaseClassName>
+            <usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
+          </statelessTestsetReporter>
         </configuration>
         <executions>
           <execution>

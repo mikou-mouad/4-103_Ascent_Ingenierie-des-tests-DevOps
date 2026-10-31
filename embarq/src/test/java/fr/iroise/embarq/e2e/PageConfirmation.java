@@ -1,7 +1,8 @@
 package fr.iroise.embarq.e2e;
 
+import static fr.iroise.embarq.e2e.TestId.testId;
+
 import java.time.Duration;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,18 +15,18 @@ public class PageConfirmation {
     PageConfirmation(WebDriver navigateur) {
         this.navigateur = navigateur;
         new WebDriverWait(navigateur, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("reference")));
+                .until(ExpectedConditions.visibilityOfElementLocated(testId("reference")));
     }
 
     public String reference() {
-        return navigateur.findElement(By.id("reference")).getText();
+        return navigateur.findElement(testId("reference")).getText();
     }
 
     public String montant() {
-        return navigateur.findElement(By.id("montant")).getText();
+        return navigateur.findElement(testId("montant")).getText();
     }
 
     public String statut() {
-        return navigateur.findElement(By.id("statut")).getText();
+        return navigateur.findElement(testId("statut")).getText();
     }
 }

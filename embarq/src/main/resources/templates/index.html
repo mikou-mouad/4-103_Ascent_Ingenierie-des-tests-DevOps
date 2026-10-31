@@ -18,12 +18,12 @@
   <p th:if="${traversees.isEmpty()}" class="vide">Aucune traversée programmée.</p>
 
   <section class="cartes" th:unless="${traversees.isEmpty()}">
-    <article class="carte" th:each="d : ${traversees}">
+    <article class="carte" data-testid="traversee" th:each="d : ${traversees}">
       <p class="carte-date" th:text="${#temporals.format(d.traversee().dateHeure, 'EEEE d MMMM, HH:mm')}">lundi 1 avril, 08:30</p>
       <h2 class="carte-trajet" th:text="|${d.traversee().depart} → ${d.traversee().arrivee}|">Brest → Ouessant</h2>
-      <p class="carte-navire" th:text="${d.traversee().navire}">Fromveur II</p>
+      <p class="carte-navire" data-testid="navire" th:text="${d.traversee().navire}">Fromveur II</p>
       <p class="carte-places" th:text="${d.complete()} ? 'Complet' : |${d.placesRestantes()} places|">280 places</p>
-      <a th:unless="${d.complete()}" class="bouton"
+      <a th:unless="${d.complete()}" class="bouton" data-testid="reserver"
          th:href="@{/traversees/{id}/reservation(id=${d.traversee().id})}">Réserver ma place</a>
     </article>
   </section>
