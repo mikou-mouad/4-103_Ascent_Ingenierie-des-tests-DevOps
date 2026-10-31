@@ -1,0 +1,153 @@
+// Pipeline d'Embarq, exécuté par le Jenkins du lab.
+// Il est lancé par GitLab CI/CD à chaque push : voir .gitlab-ci.yml et embarq/ci/declencher-jenkins.sh.
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        // Version de l'image Docker : construite une fois, déployée partout (e2e, preprod, prod)
+        VERSION = "1.0.${env.BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Compilation') {
+            steps {
+                dir('embarq') {
+                    sh 'mvn -B compile'
+                }
+            }
+        }
+
+        stage('Tests unitaires') {
+            steps {
+                dir('embarq') {
+                    sh 'mvn -B test'
+                }
+            }
+            post {
+                always {
+                    junit 'embarq/target/surefire-reports/*.xml'
+                    // Les scénarios Cucumber, lisibles par Maëlle : la documentation vivante des règles métier
+                    publishHTML target: [
+                        reportName : 'Scénarios Cucumber',
+                        reportDir  : 'embarq/target/cucumber',
+                        reportFiles: 'rapport.html',
+                        keepAll    : true,
+                        alwaysLinkToLastBuild: true,
+                        allowMissing: true
+                    ]
+                }
+            }
+        }
+
+        stage('Tests d\'intégration') {
+            steps {
+                dir('embarq') {
+                    // Les tests unitaires sont déjà passés : on ne lance que les *IT (failsafe)
+                    sh 'mvn -B verify -Dtests.unitaires.ignores=true'
+                }
+            }
+            post {
+                always {
+                    junit 'embarq/target/failsafe-reports/*.xml'
+                    // Couverture des tests unitaires et d'intégration (le seuil est vérifié par Maven : jacoco:check)
+                    recordCoverage tools: [[parser: 'JACOCO', pattern: 'embarq/target/site/jacoco/jacoco.xml']]
+                }
+            }
+        }
+
+        stage('Paquet') {
+            steps {
+                dir('embarq') {
+                    sh 'mvn -B package -DskipTests'
+                }
+                archiveArtifacts artifacts: 'embarq/target/embarq.jar', fingerprint: true
+            }
+        }
+
+        stage('Image Docker') {
+            steps {
+                dir('embarq') {
+                    sh 'docker build -t embarq:$VERSION .'
+                }
+            }
+        }
+
+        stage('Environnement e2e') {
+            steps {
+                dir('embarq') {
+                    sh 'bash deploy/deployer.sh e2e $VERSION'
+                }
+            }
+        }
+
+        stage('Tests end-to-end') {
+            steps {
+                dir('embarq') {
+                    // Le navigateur de la Selenium Grid ouvre Embarq déployé dans l'environnement e2e
+                    sh 'mvn -B -Pe2e verify -Dapp.url=http://embarq-e2e:8080 -Dselenium.url=http://selenium:4444'
+                }
+            }
+            post {
+                always {
+                    junit 'embarq/target/failsafe-reports/TEST-*E2E.xml'
+                }
+            }
+        }
+
+        stage('Préproduction') {
+            steps {
+                dir('embarq') {
+                    sh 'bash deploy/deployer.sh preprod $VERSION'
+                    sh 'bash deploy/smoke-test.sh http://embarq-preprod:8080 $VERSION'
+                }
+            }
+        }
+
+        stage('Approbation') {
+            steps {
+                // Livraison continue : la mise en production est une décision humaine, prise dans Jenkins
+                timeout(time: 15, unit: 'MINUTES') {
+                    input message: "Mettre Embarq ${env.VERSION} en production ?", ok: 'Déployer en production'
+                }
+            }
+        }
+
+        stage('Production') {
+            steps {
+                dir('embarq') {
+                    script {
+                        // La version en production avant ce déploiement : celle qu'on remet si ça tourne mal
+                        def precedente = sh(returnStdout: true, script:
+                                "docker inspect --format '{{.Config.Image}}' embarq-prod-app-1 2>/dev/null | cut -d: -f2 || true").trim()
+                        try {
+                            sh 'bash deploy/deployer.sh prod $VERSION'
+                            sh 'bash deploy/smoke-test.sh http://embarq-prod:8080 $VERSION'
+                        } catch (erreur) {
+                            if (precedente) {
+                                echo "Échec en production : retour à la version ${precedente}"
+                                sh "bash deploy/deployer.sh prod ${precedente}"
+                                sh "bash deploy/smoke-test.sh http://embarq-prod:8080 ${precedente}"
+                            }
+                            error "Mise en production de ${env.VERSION} annulée. Production : ${precedente ?: 'aucune version'}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // L'environnement e2e ne sert que le temps du build : on le supprime, base comprise
+            dir('embarq') {
+                sh 'docker compose -p embarq-e2e --env-file deploy/e2e.env down -v || true'
+            }
+        }
+    }
+}
