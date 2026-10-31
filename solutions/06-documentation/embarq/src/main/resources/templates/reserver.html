@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réserver – Iroise Traversées</title>
+  <link rel="stylesheet" href="/embarq.css">
+</head>
+<body>
+<header>
+  <a href="/" class="marque">Iroise Traversées</a>
+  <span class="slogan">Brest · Le Conquet · Molène · Ouessant</span>
+</header>
+
+<main>
+  <p class="fil">Étape 1 sur 2 · Vos passagers</p>
+  <h1 th:text="|${traversee.traversee().depart} → ${traversee.traversee().arrivee}|">Brest → Ouessant</h1>
+  <p class="detail">
+    <span th:text="${#temporals.format(traversee.traversee().dateHeure, 'EEEE d MMMM, HH:mm')}">lundi 1 avril, 08:30</span>
+    · <span th:text="${traversee.traversee().navire}">Fromveur II</span>
+    · <span class="places" th:text="|${traversee.placesRestantes()} places restantes|">280 places restantes</span>
+  </p>
+
+  <p th:if="${erreur}" class="alerte" data-testid="erreur" th:text="${erreur}">Cette traversée est complète.</p>
+
+  <form method="post" th:action="@{/traversees/{id}/reservation(id=${traversee.traversee().id})}" th:object="${demande}">
+    <fieldset>
+      <legend>Qui voyage ?</legend>
+      <div class="ligne">
+        <div>
+          <label for="nb-adultes">Adultes</label>
+          <input id="nb-adultes" data-testid="adultes" type="number" min="1" th:field="*{adultes}">
+        </div>
+        <div>
+          <label for="nb-enfants">Enfants (4 à 11 ans)</label>
+          <input id="nb-enfants" data-testid="enfants" type="number" min="0" th:field="*{enfants}">
+        </div>
+        <div>
+          <label for="nb-velos">Vélos</label>
+          <input id="nb-velos" data-testid="velos" type="number" min="0" th:field="*{velos}">
+        </div>
+      </div>
+      <p class="aide-erreur" data-testid="erreur" th:if="${#fields.hasErrors('adultes')}" th:errors="*{adultes}"></p>
+      <p class="aide-erreur" data-testid="erreur" th:if="${#fields.hasErrors('enfants')}" th:errors="*{enfants}"></p>
+      <p class="aide-erreur" data-testid="erreur" th:if="${#fields.hasErrors('velos')}" th:errors="*{velos}"></p>
+      <label class="case"><input id="passager-resident" data-testid="resident" type="checkbox" th:field="*{resident}"> Résident des îles (carte à présenter à l'embarquement)</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Vos coordonnées</legend>
+      <label for="passager-nom">Nom</label>
+      <input id="passager-nom" data-testid="nom" type="text" th:field="*{nom}" autocomplete="family-name">
+      <p class="aide-erreur" data-testid="erreur" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></p>
+
+      <label for="passager-email">E-mail</label>
+      <input id="passager-email" data-testid="email" type="text" th:field="*{email}" autocomplete="email">
+      <p class="aide-erreur" data-testid="erreur" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+    </fieldset>
+
+    <button type="submit" class="bouton bouton-principal" data-testid="valider">Confirmer ma réservation</button>
+  </form>
+</main>
+
+<footer class="pied" th:text="|Embarq ${version} · ${environnement}|">Embarq dev · local</footer>
+</body>
+</html>
