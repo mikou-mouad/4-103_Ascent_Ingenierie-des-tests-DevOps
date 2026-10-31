@@ -56,4 +56,15 @@ class ReservationServiceTest {
                 .isInstanceOf(TraverseeComplete.class);
         verify(reservations, never()).save(any());
     }
+
+    @Test
+    void les_enfants_comptent_dans_la_capacite() {
+        // Le mock affirme que 10 places sont vendues : le test ne vérifie pas comment on les compte
+        when(reservations.placesReservees(any())).thenReturn(10L);
+
+        assertThatThrownBy(() -> service.reserver(7L, new DemandeReservation("Kerbrat", "kerbrat@example.org", 1, 2, 0)))
+                .isInstanceOf(TraverseeComplete.class)
+                .hasMessageContaining("2 place(s)");
+        verify(reservations, never()).save(any());
+    }
 }

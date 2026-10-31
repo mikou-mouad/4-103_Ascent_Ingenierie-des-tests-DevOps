@@ -26,7 +26,7 @@ public class TarifService {
     public BigDecimal calculer(int adultes, int enfants, int velos) {
         BigDecimal passagers = ADULTE.multiply(BigDecimal.valueOf(adultes))
                 .add(ENFANT.multiply(BigDecimal.valueOf(enfants)));
-        if (adultes + enfants > SEUIL_GROUPE) {
+        if (adultes + enfants >= SEUIL_GROUPE) {
             passagers = passagers.multiply(REMISE_GROUPE);
         }
         BigDecimal total = passagers.add(VELO.multiply(BigDecimal.valueOf(velos)));
