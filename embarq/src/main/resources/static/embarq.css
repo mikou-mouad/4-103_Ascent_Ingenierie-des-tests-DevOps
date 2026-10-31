@@ -140,3 +140,93 @@ footer {
   gap: 8px;
   align-items: center;
 }
+
+/* Nouvelle charte (agence Brume) */
+.cartes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.carte {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(11, 60, 93, 0.15);
+}
+
+.carte h2 {
+  margin: 4px 0;
+  font-size: 1.15rem;
+}
+
+.carte p {
+  margin: 4px 0;
+}
+
+.carte-date {
+  color: #6b7a89;
+  text-transform: capitalize;
+}
+
+.carte-places {
+  font-weight: 600;
+}
+
+.fil {
+  color: #6b7a89;
+  margin-bottom: 0;
+}
+
+fieldset {
+  border: 1px solid var(--sable);
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.alerte, .aide-erreur {
+  color: var(--balise);
+  margin: 0;
+}
+
+.alerte {
+  background: #fbe9eb;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.bouton-principal {
+  justify-self: start;
+  font-size: 1.1rem;
+}
+
+.billet {
+  background: white;
+  border-left: 6px solid var(--mer);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.billet-reference {
+  font-family: monospace;
+  font-size: 1.6rem;
+  margin: 0 0 8px;
+}
+
+.billet .recapitulatif {
+  padding: 0;
+}
+
+.pied {
+  text-align: center;
+  color: #6b7a89;
+  padding: 24px;
+  font-size: 0.9rem;
+}

@@ -15,27 +15,20 @@
 <main>
   <h1>Prochaines traversées</h1>
 
-  <p th:if="${traversees.isEmpty()}" id="aucune-traversee">Aucune traversée programmée.</p>
+  <p th:if="${traversees.isEmpty()}" class="vide">Aucune traversée programmée.</p>
 
-  <table th:unless="${traversees.isEmpty()}" id="traversees">
-    <thead>
-    <tr><th>Départ</th><th>Trajet</th><th>Navire</th><th>Places</th><th></th></tr>
-    </thead>
-    <tbody>
-    <tr th:each="d : ${traversees}" th:id="|traversee-${d.traversee().id}|">
-      <td th:text="${#temporals.format(d.traversee().dateHeure, 'EEEE d MMMM, HH:mm')}">lundi 1 avril, 08:30</td>
-      <td th:text="|${d.traversee().depart} → ${d.traversee().arrivee}|">Brest → Ouessant</td>
-      <td th:text="${d.traversee().navire}">Fromveur II</td>
-      <td class="places" th:text="${d.complete()} ? 'Complet' : ${d.placesRestantes()}">280</td>
-      <td>
-        <a th:unless="${d.complete()}" class="bouton" th:id="|reserver-${d.traversee().id}|"
-           th:href="@{/traversees/{id}/reservation(id=${d.traversee().id})}">Réserver</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <section class="cartes" th:unless="${traversees.isEmpty()}">
+    <article class="carte" th:each="d : ${traversees}">
+      <p class="carte-date" th:text="${#temporals.format(d.traversee().dateHeure, 'EEEE d MMMM, HH:mm')}">lundi 1 avril, 08:30</p>
+      <h2 class="carte-trajet" th:text="|${d.traversee().depart} → ${d.traversee().arrivee}|">Brest → Ouessant</h2>
+      <p class="carte-navire" th:text="${d.traversee().navire}">Fromveur II</p>
+      <p class="carte-places" th:text="${d.complete()} ? 'Complet' : |${d.placesRestantes()} places|">280 places</p>
+      <a th:unless="${d.complete()}" class="bouton"
+         th:href="@{/traversees/{id}/reservation(id=${d.traversee().id})}">Réserver ma place</a>
+    </article>
+  </section>
 </main>
 
-<footer id="version" th:text="|Embarq ${version} · ${environnement}|">Embarq dev · local</footer>
+<footer class="pied" th:text="|Embarq ${version} · ${environnement}|">Embarq dev · local</footer>
 </body>
 </html>
