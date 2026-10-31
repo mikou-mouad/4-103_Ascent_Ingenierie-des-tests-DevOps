@@ -86,7 +86,19 @@ pipeline {
             }
         }
 
-        // TP 05 : l'étape « Tests end-to-end » se place ici
+        stage('Tests end-to-end') {
+            steps {
+                dir('embarq') {
+                    // Le navigateur de la Selenium Grid ouvre Embarq déployé dans l'environnement e2e
+                    sh 'mvn -B -Pe2e verify -Dapp.url=http://embarq-e2e:8080 -Dselenium.url=http://selenium:4444'
+                }
+            }
+            post {
+                always {
+                    junit 'embarq/target/failsafe-reports/TEST-*E2E.xml'
+                }
+            }
+        }
     }
 
     post {
