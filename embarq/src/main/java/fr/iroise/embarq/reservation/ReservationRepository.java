@@ -9,7 +9,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Optional<Reservation> findByReference(String reference);
 
-    /** Nombre de places déjà vendues sur une traversée. */
-    @Query("select coalesce(sum(r.adultes), 0) from Reservation r where r.traversee.id = :traverseeId")
+    /** Nombre de places déjà vendues sur une traversée : adultes et enfants des réservations confirmées. */
+    @Query("""
+            select coalesce(sum(r.adultes + r.enfants), 0) from Reservation r
+            where r.traversee.id = :traverseeId
+              and r.statut = fr.iroise.embarq.reservation.StatutReservation.CONFIRMEE
+            """)
     long placesReservees(@Param("traverseeId") Long traverseeId);
 }

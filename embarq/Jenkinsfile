@@ -31,6 +31,20 @@ pipeline {
             }
         }
 
+        stage('Tests d\'intégration') {
+            steps {
+                dir('embarq') {
+                    // Les tests unitaires sont déjà passés : on ne lance que les *IT (failsafe)
+                    sh 'mvn -B verify -Dtests.unitaires.ignores=true'
+                }
+            }
+            post {
+                always {
+                    junit 'embarq/target/failsafe-reports/*.xml'
+                }
+            }
+        }
+
         stage('Paquet') {
             steps {
                 dir('embarq') {
