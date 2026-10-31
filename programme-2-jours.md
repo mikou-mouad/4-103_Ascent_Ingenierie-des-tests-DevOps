@@ -68,7 +68,7 @@ Le pipeline monté au TP 00 sert jusqu'au dernier TP : **chaque TP repart de l'�
 | 3 | « On est prêts pour la saison ? » Personne ne sait répondre | Culture qualité, couverture, tests instables, indicateurs, quality gate | Culture du test | `tp-03-indicateurs` |
 | 4 | Le tarif « résident des îles » : Tom l'a codé, Maëlle voulait autre chose | Shift-left, BDD, Cucumber, outils (JUnit, Cucumber, Selenium, Jenkins) | Automatisation et industrialisation | `tp-04-bdd` |
 | 5 | Deux jours à recliquer le site avant chaque livraison | Selenium WebDriver, Selenium Grid, Page Object, attentes | Automatisation et industrialisation | `tp-05-selenium` |
-| 6 | Inès est en congés, la nouvelle page casse 5 tests et personne ne sait pourquoi | Documenter les cas de test, documentation vivante, maintenance des tests, environnements | Documentation et maintenance | `tp-06-documentation` |
+| 6 | Inès est en congés : la nouvelle page casse tous les tests Selenium, et personne ne sait pourquoi | Documenter les cas de test, documentation vivante, maintenance des tests, environnements | Documentation et maintenance | `tp-06-documentation` |
 | 7 | Livrer le 1er avril, sans refaire le vendredi noir | Déploiement continu, préprod et prod, smoke tests, approbation, rollback | Méthodes de déploiement | `tp-07-deploiement` |
 
 **Les bugs de l'été dernier sont dans le code de départ.** Les participants les retrouvent avec les bons tests : le tarif de groupe (TP 01), le surbooking (TP 02), les références de réservation en double (TP 03).
