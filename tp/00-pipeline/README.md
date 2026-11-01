@@ -121,7 +121,19 @@ Ouvrez http://localhost:8080 et connectez-vous avec `admin` et votre mot de pass
 
 **Question 4.** Comment Jenkins sait-il quel dépôt cloner et quel fichier lire pour connaître les étapes du pipeline ?
 
-Créez un jeton d'API Jenkins pour GitLab : en haut à droite, **admin** > **Security** > **API Token** > **Add new Token**, nom `gitlab`, **Generate**. Copiez le jeton : il ne s'affiche qu'une fois.
+### Le jeton d'API Jenkins
+
+GitLab va appeler Jenkins : il lui faut un jeton **Jenkins**. Ne le confondez pas avec le jeton GitLab de l'étape 2.
+
+| Jeton | Créé dans | Sert à | Où il va |
+|-------|-----------|--------|----------|
+| Jeton d'accès GitLab (étape 2) | gitlab.com | `git push` vers gitlab.com | Le mot de passe demandé par `git push` |
+| **Jeton d'API Jenkins** (ici) | Jenkins, http://localhost:8080 | Laisser GitLab lancer le job Jenkins | La variable GitLab `JENKINS_TOKEN` (étape 4) |
+
+1. Dans Jenkins, cliquez sur **admin**, en haut à droite.
+2. Dans le menu de gauche, cliquez sur **Security**.
+3. Section **API Token** : **Add new Token**, nom `gitlab`, puis **Generate**.
+4. Copiez le jeton affiché et gardez-le dans un fichier : il ne s'affiche qu'une fois.
 
 Vérifiez-le tout de suite, avant de le donner à GitLab :
 
@@ -139,7 +151,7 @@ curl -s -o /dev/null -w "%{http_code}
 | Clé | Valeur | Options |
 |-----|--------|---------|
 | `JENKINS_USER` | `admin` | décochez **Protect variable** |
-| `JENKINS_TOKEN` | le jeton d'API Jenkins (pas le mot de passe de `.env`) | visibilité **Masked**, décochez **Protect variable** |
+| `JENKINS_TOKEN` | le **jeton d'API Jenkins** de l'étape 3 (ni le jeton GitLab, ni le mot de passe de `.env`) | visibilité **Masked**, décochez **Protect variable** |
 
 Une variable protégée n'est transmise qu'aux branches protégées. Les branches des TP ne le sont pas : il faut décocher **Protect variable**.
 
