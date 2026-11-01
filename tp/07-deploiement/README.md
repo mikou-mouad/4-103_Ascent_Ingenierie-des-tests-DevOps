@@ -142,6 +142,8 @@ Corrigez `application-prod.properties`, poussez, approuvez : la nouvelle version
 
 ## Étape 4 – Les indicateurs de livraison (5 min)
 
+Le script des indicateurs du TP 03 demande votre jeton d'API Jenkins. Il est dans GitLab : **Settings** > **CI/CD** > **Variables**, ligne `JENKINS_TOKEN`, bouton **Reveal values**.
+
 ```bash
 cd ~/iroise/embarq
 JENKINS_USER=admin JENKINS_TOKEN=<votre-jeton> bash ci/indicateurs.sh
