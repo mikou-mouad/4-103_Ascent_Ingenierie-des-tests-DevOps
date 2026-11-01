@@ -78,8 +78,10 @@ Dans `embarq/pom.xml`, ajoutez ce plugin à la fin de la section `<plugins>`, ju
 
 ```bash
 cd ~/iroise/embarq
-mvn -B verify
+mvn -B clean verify
 ```
+
+Le `clean` est indispensable : JaCoCo **ajoute** ses mesures au fichier `target/jacoco.exec` au lieu de le remplacer. Sans `clean`, les mesures d'un build précédent (d'une autre version du code) se mélangent aux nouvelles, la couverture est fausse, et Maven affiche `Execution data for class … does not match`. Pour la même raison, le `Jenkinsfile` commence par `mvn -B clean compile`.
 
 **Question 1.** Le build échoue. Quel message donne JaCoCo ? Quelle est la couverture des lignes d'Embarq ?
 
@@ -97,7 +99,7 @@ Descendez dans les paquetages, jusqu'au code coloré : vert = exécuté, rouge =
 
 **Question 3.** `TarifService` est à 100 %. Au TP 01, avant votre test paramétré, l'était-il déjà ? Le bug du tarif de groupe y était-il quand même ?
 
-**Le seuil.** Une couverture minimale de 60 % bloque le pipeline aujourd'hui. Deux options : écrire des tests tout de suite, ou fixer le seuil au niveau actuel pour qu'il **ne baisse plus**, puis le remonter à chaque nouveau test. Choisissez la seconde : remplacez `0.60` par `0.45`, et relancez `mvn -B verify` jusqu'au `BUILD SUCCESS`.
+**Le seuil.** Une couverture minimale de 60 % bloque le pipeline aujourd'hui. Deux options : écrire des tests tout de suite, ou fixer le seuil au niveau actuel pour qu'il **ne baisse plus**, puis le remonter à chaque nouveau test. Choisissez la seconde : remplacez `0.60` par `0.45`, et relancez `mvn -B clean verify` jusqu'au `BUILD SUCCESS`.
 
 ## Étape 3 – La couverture dans le pipeline (10 min)
 
