@@ -9,11 +9,6 @@ pipeline {
         disableConcurrentBuilds()
     }
 
-    environment {
-        // Version de l'image Docker : construite une fois, déployée partout (e2e, preprod, prod)
-        VERSION = "1.0.${env.BUILD_NUMBER}"
-    }
-
     stages {
         stage('Compilation') {
             steps {
@@ -68,33 +63,6 @@ pipeline {
                     sh 'mvn -B package -DskipTests'
                 }
                 archiveArtifacts artifacts: 'embarq/target/embarq.jar', fingerprint: true
-            }
-        }
-
-        stage('Image Docker') {
-            steps {
-                dir('embarq') {
-                    sh 'docker build -t embarq:$VERSION .'
-                }
-            }
-        }
-
-        stage('Environnement e2e') {
-            steps {
-                dir('embarq') {
-                    sh 'bash deploy/deployer.sh e2e $VERSION'
-                }
-            }
-        }
-
-        // TP 05 : l'étape « Tests end-to-end » se place ici
-    }
-
-    post {
-        always {
-            // L'environnement e2e ne sert que le temps du build : on le supprime, base comprise
-            dir('embarq') {
-                sh 'docker compose -p embarq-e2e --env-file deploy/e2e.env down -v || true'
             }
         }
     }
