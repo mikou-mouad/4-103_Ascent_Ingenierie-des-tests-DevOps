@@ -17,6 +17,17 @@ AUTH="$JENKINS_USER:$JENKINS_TOKEN"
 ENTETES=$(mktemp)
 trap 'rm -f "$ENTETES"' EXIT
 
+# Vérification des identifiants et du job, avec un message clair plutôt qu'un code d'erreur de curl
+STATUT=$(curl -s -o /dev/null -w '%{http_code}' -u "$AUTH" "$JENKINS_URL/job/$JENKINS_JOB/api/json" || true)
+case "$STATUT" in
+  200) ;;
+  401) echo "Jenkins refuse les identifiants (401) : vérifiez JENKINS_USER (admin) et JENKINS_TOKEN (le jeton d'API, pas le mot de passe)." >&2; exit 1 ;;
+  403) echo "Jenkins refuse l'accès (403) : l'utilisateur $JENKINS_USER n'a pas les droits sur le job." >&2; exit 1 ;;
+  404) echo "Le job Jenkins « $JENKINS_JOB » n'existe pas (404) : vérifiez GITLAB_PROJET dans lab/.env, puis docker compose up -d." >&2; exit 1 ;;
+  000) echo "Jenkins ne répond pas sur $JENKINS_URL : est-il démarré ? (cd ~/iroise/lab && docker compose ps)" >&2; exit 1 ;;
+  *) echo "Réponse inattendue de Jenkins : $STATUT" >&2; exit 1 ;;
+esac
+
 echo "Lancement du job Jenkins « $JENKINS_JOB » pour la branche $BRANCHE ($COMMIT)"
 FILE=$(curl -fsS -u "$AUTH" -X POST -D - -o /dev/null \
          --data-urlencode "BRANCHE=$BRANCHE" --data-urlencode "COMMIT=$COMMIT" \
