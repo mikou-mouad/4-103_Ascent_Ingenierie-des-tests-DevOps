@@ -10,7 +10,8 @@ N=${1:-20}
 AUTH="${JENKINS_USER:?JENKINS_USER absente}:${JENKINS_TOKEN:?JENKINS_TOKEN absente}"
 
 # Les N derniers builds terminés : réussite, durée, temps de réparation
-curl -fsS -u "$AUTH" "$JENKINS_URL/job/$JENKINS_JOB/api/json?tree=builds[number,result,duration,timestamp]{0,$N}" \
+# -g : curl ne doit pas interpréter les [ ] et { } de l'adresse, qui sont pour l'API de Jenkins
+curl -gfsS -u "$AUTH" "$JENKINS_URL/job/$JENKINS_JOB/api/json?tree=builds[number,result,duration,timestamp]{0,$N}" \
 | jq -r '
   [.builds[] | select(.result != null)] as $b
   | ($b | length) as $total
