@@ -48,11 +48,11 @@ bash deploy/deployer.sh dev
 Ouvrez deux onglets dans Firefox :
 
 - http://localhost:8090 : Embarq en dev ;
-- http://localhost:7900 : le bureau du navigateur de la Selenium Grid (cliquez sur **Connect**). C'est là que vous verrez les tests travailler.
+- http://localhost:7900 : le bureau du navigateur de la Selenium Grid (cliquez sur **Connect**). Pour l'instant, il n'affiche que le logo Selenium sur fond noir : c'est normal. Chrome n'y apparaît que **pendant** un test, à l'étape 3. Gardez cet onglet ouvert.
 
 Dans le premier onglet, faites une réservation à la main, puis inspectez la page (clic droit > **Inspecter**) : notez les `id` du lien « Réserver », des champs du formulaire, du bouton, et des éléments de la page de confirmation.
 
-**Question 1.** Le navigateur de la Grid ouvre `http://embarq-dev:8080`, et pas `http://localhost:8090`. Pourquoi ?
+**Question 1.** Vous ouvrez Embarq avec `http://localhost:8090`. À l'étape 3, les tests donneront pourtant au navigateur de la Grid une autre adresse : `http://embarq-dev:8080`. Pourquoi ? (Indice : où tourne ce navigateur ? Pour lui, que désigne `localhost` ?)
 
 ## Étape 2 – Les Page Objects (25 min)
 
