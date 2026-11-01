@@ -68,12 +68,14 @@ Ouvrez http://localhost:8090 dans Firefox, et réservez une traversée pour 2 ad
 
 Le projet doit être public : Jenkins le clone sans mot de passe.
 
-Ajoutez gitlab.com comme second dépôt distant, puis poussez la branche du TP :
+Sur la page du projet, cliquez sur **Code** et copiez l'adresse **Clone with HTTPS**. Elle a la forme `https://gitlab.com/<votre-espace>/embarq.git` : une barre oblique après `gitlab.com`, pas deux-points. Vous en aurez besoin deux fois : ici, et dans `lab/.env` à l'étape 3.
+
+Ajoutez gitlab.com comme second dépôt distant, avec cette adresse, puis poussez la branche du TP :
 
 ```bash
 cd ~/iroise
 git config --global credential.helper 'cache --timeout=36000'
-git remote add gitlab https://gitlab.com/<votre-compte>/embarq.git
+git remote add gitlab https://gitlab.com/<votre-espace>/embarq.git
 git push gitlab tp-00-pipeline
 ```
 
@@ -102,7 +104,7 @@ nano .env
 | Variable | Valeur |
 |----------|--------|
 | `JENKINS_ADMIN_PASSWORD` | un mot de passe de votre choix |
-| `GITLAB_PROJET` | `https://gitlab.com/<votre-compte>/embarq.git` |
+| `GITLAB_PROJET` | l'adresse **Clone with HTTPS** du projet, `https://gitlab.com/<votre-espace>/embarq.git` |
 | `DOCKER_GID` | le numéro affiché par la commande `getent` |
 
 Démarrez le lab et attendez Jenkins :
