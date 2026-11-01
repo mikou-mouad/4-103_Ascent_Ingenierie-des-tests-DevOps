@@ -25,7 +25,8 @@ Les tests prennent deux paramètres, l'adresse d'Embarq **vue depuis le navigate
 
 | Environnement | Déploiement | `-Dapp.url` |
 |---------------|-------------|-------------|
-| e2e (base neuve) | `bash deploy/deployer.sh e2e` | `http://embarq-e2e:8080` |
+| dev (votre environnement, en local) | `bash deploy/deployer.sh dev` | `http://embarq-dev:8080` |
+| e2e (le pipeline, base neuve à chaque build ; ne pas l'utiliser en local) | Jenkins | `http://embarq-e2e:8080` |
 | preprod | pipeline (TP 07) | `http://embarq-preprod:8080` |
 
 `-Dselenium.url` vaut `http://localhost:4444` par défaut (depuis la machine) ; Jenkins utilise `http://selenium:4444`.
