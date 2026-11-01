@@ -32,7 +32,7 @@
 <body>
 <div id="scene">
 <section id="cover" data-transition="fade" style="background:#102A2E;color:#F2EFE9;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
-<div style="display:flex;gap:20px;align-items:center"><x-icon data-g="⚓" style="color:#F4C95D;width:56px;height:56px"></x-icon><p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#F4C95D">Formation Ascent 4-103 · 2 jours</p></div>
+<div style="display:flex;gap:20px;align-items:center"><x-icon data-g="⚓" style="color:#F4C95D;width:56px;height:56px"></x-icon><p style="font-size:28px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#F4C95D">Formation 4-103 · 2 jours</p></div>
 <h1 style="font-family:'Bitter', Georgia, serif;font-size:132px;font-weight:700;line-height:1.0;color:#F2EFE9">Ingénierie des<br>tests DevOps</h1>
 <p style="font-family:'Bitter', Georgia, serif;font-size:46px;font-style:italic;line-height:1.3;color:#B9C7C9">L'histoire d'Iroise Traversées :<br>ouvrir la saison le 1er avril, sans laisser un passager sur le quai</p>
 <div style="display:flex;gap:24px">
@@ -120,7 +120,7 @@
 </div>
 </div>
 <p style="font-size:27px;color:#55616A">9h00 – 12h00 et 13h00 – 16h00 · pauses à 10h30 et 14h30 · 75 % de pratique</p>
-<aside>Le détail minute par minute est dans programme-2-jours.md du dépôt. Les durées sont celles des modules officiels Ascent ; les quatre pauses café de 15 minutes y sont prises. Une journée : 5 h 30 de contenu. Les TP demandés par le programme sont tous couverts : analyse d'un pipeline (TP 00), stratégie de test (TP 01), indicateurs (TP 03), scénario Selenium (TP 05), documentation des tests (TP 06), déploiement avec tests (TP 07).</aside>
+<aside>Le détail minute par minute est dans programme-2-jours.md du dépôt. Les durées sont celles des modules du programme officiel ; les quatre pauses café de 15 minutes y sont prises. Une journée : 5 h 30 de contenu. Les TP demandés par le programme sont tous couverts : analyse d'un pipeline (TP 00), stratégie de test (TP 01), indicateurs (TP 03), scénario Selenium (TP 05), documentation des tests (TP 06), déploiement avec tests (TP 07).</aside>
 </section>
 <section id="branches" data-transition="fade" style="background:#FAF8F4;color:#1A2326;font-family:'Source Sans 3', Arial, sans-serif;padding:104px 128px;display:flex;flex-direction:column;gap:36px">
 <p style="font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#D7263D">Le dépôt des TP</p>
@@ -140,7 +140,7 @@
 <tr><td><span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">solution-finale</span></td><td>L'état final d'Embarq et de son pipeline</td></tr>
 </table>
 </div>
-<div style="width:780px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:23px;line-height:1.5;color:#F2EFE9;white-space:nowrap"><span style="color:#7F9496"># une fois, la veille (guide du lab)</span><br>git clone \<br>&#160;&#160;https://github.com/mikou-mouad/\<br>&#160;&#160;4-103_Ascent_Ingenierie-des-tests-DevOps.git \<br>&#160;&#160;~/iroise<br><br><span style="color:#7F9496"># au début de chaque TP</span><br>cd ~/iroise &amp;&amp; git fetch<br>git stash -u<br>git checkout <span style="color:#F4C95D">tp-03-indicateurs</span><br>git push gitlab HEAD</p></div>
+<div style="width:780px;background:#0B1D21;border-radius:16px;padding:26px 32px;display:flex;flex-direction:column;flex:none"><p style="font-family:'JetBrains Mono', monospace;font-size:23px;line-height:1.5;color:#F2EFE9;white-space:nowrap"><span style="color:#7F9496"># une fois, la veille (guide du lab)</span><br>git clone \<br>&#160;&#160;https://github.com/mikou-mouad/\<br>&#160;&#160;4-103_Ingenierie-des-tests-DevOps.git \<br>&#160;&#160;~/iroise<br><br><span style="color:#7F9496"># au début de chaque TP</span><br>cd ~/iroise &amp;&amp; git fetch<br>git stash -u<br>git checkout <span style="color:#F4C95D">tp-03-indicateurs</span><br>git push gitlab HEAD</p></div>
 </div>
 <p style="font-size:26px;line-height:1.4;color:#55616A">Dans chaque branche : l'énoncé (<span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">tp/NN-*/</span>) et la correction (<span style="font-family:'JetBrains Mono', monospace;font-size:0.88em">solutions/NN-*/</span>), sans rien du TP suivant.</p>
 <aside>git stash -u met de côté le travail du TP précédent, fichiers non suivis compris : rien n'est perdu. git push gitlab HEAD pousse la nouvelle branche dans le projet gitlab.com du participant : le pipeline GitLab → Jenkins construit le point de départ du TP. Un participant bloqué consulte la correction, ou repart de la branche du TP suivant. La remote gitlab est ajoutée au TP 00.</aside>

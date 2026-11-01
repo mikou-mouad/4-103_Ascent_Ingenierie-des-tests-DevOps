@@ -1,6 +1,6 @@
 # Ingénierie des tests DevOps : programme sur 2 jours
 
-**Référence :** Ascent Formation 4-103 · **Durée :** 2 jours – 12 h · **Public :** ingénieurs DevOps, testeurs et ingénieurs QA, développeurs impliqués dans l'intégration et la livraison continues
+**Référence :** 4-103 · **Durée :** 2 jours – 12 h · **Public :** ingénieurs DevOps, testeurs et ingénieurs QA, développeurs impliqués dans l'intégration et la livraison continues
 
 **Rythme d'une journée**
 
@@ -21,7 +21,7 @@ Une journée fait 6 h, pauses café comprises : il reste **5 h 30 de contenu par
 
 Le programme officiel demande au moins 60 % de pratique.
 
-**Les modules officiels par jour** (la répartition est celle du programme Ascent) :
+**Les modules officiels par jour** (la répartition est celle du programme officiel) :
 
 | Jour | Modules officiels | Durée officielle |
 |------|-------------------|------------------|

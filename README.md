@@ -1,6 +1,6 @@
 # Ingénierie des tests DevOps : supports de formation
 
-Formation Ascent 4-103 de 2 jours (12 h, 75 % de pratique), racontée à travers l'histoire d'**Iroise Traversées**, la compagnie maritime qui relie Brest et Le Conquet aux îles de Molène et d'Ouessant. Avant l'ouverture de la saison, le 1er avril, son application de réservation **Embarq** passe des tests à la main à un pipeline GitLab CI/CD et Jenkins qui teste, documente et déploie.
+Formation 4-103 de 2 jours (12 h, 75 % de pratique), racontée à travers l'histoire d'**Iroise Traversées**, la compagnie maritime qui relie Brest et Le Conquet aux îles de Molène et d'Ouessant. Avant l'ouverture de la saison, le 1er avril, son application de réservation **Embarq** passe des tests à la main à un pipeline GitLab CI/CD et Jenkins qui teste, documente et déploie.
 
 - [programme-2-jours.md](programme-2-jours.md) : le programme détaillé et le fil rouge
 - [guide-installation-lab.md](guide-installation-lab.md) : la préparation de la machine d'un participant
@@ -35,7 +35,7 @@ Elle ne contient rien du TP suivant : on peut consulter la correction sans déco
 Sur la machine du lab :
 
 ```bash
-git clone https://github.com/mikou-mouad/4-103_Ascent_Ingenierie-des-tests-DevOps.git ~/iroise
+git clone https://github.com/mikou-mouad/4-103_Ingenierie-des-tests-DevOps.git ~/iroise
 cd ~/iroise
 git checkout tp-00-pipeline
 ```
