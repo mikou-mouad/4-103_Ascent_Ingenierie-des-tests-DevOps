@@ -46,7 +46,7 @@ Au début de chaque TP suivant :
 cd ~/iroise && git fetch
 git stash -u                  # met de côté votre travail du TP précédent
 git checkout tp-03-indicateurs
-git push gitlab HEAD          # le pipeline GitLab → Jenkins construit le point de départ du TP
+git push -u gitlab HEAD       # -u : la branche suit votre projet GitLab ; le pipeline construit le point de départ du TP
 ```
 
 ## Essayer Embarq sans le lab
