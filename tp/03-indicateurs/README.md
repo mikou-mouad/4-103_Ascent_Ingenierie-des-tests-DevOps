@@ -144,7 +144,13 @@ git commit -m "Couverture JaCoCo et seuil minimal"
 git push gitlab HEAD
 ```
 
-Dans Jenkins, ouvrez le build : une page **Coverage Report** montre la couverture, et la page du job affiche son évolution d'un build à l'autre.
+Attendez la fin du pipeline (job vert dans GitLab), puis regardez la couverture dans Jenkins :
+
+1. Ouvrez la page du job : http://localhost:8080/job/embarq/
+2. En bas à gauche, dans **Builds** (l'historique), cliquez sur le numéro du dernier build (`#12`, par exemple).
+3. Dans le menu de gauche du build, cliquez sur **Coverage Report** (selon la version du plugin, le lien peut s'appeler **Coverage**).
+4. La page affiche la couverture par métrique (**Line** pour les lignes, **Branch** pour les branches), puis l'arbre des paquetages : cliquez sur `fr.iroise.embarq.web` pour retrouver les 0 %, puis sur un fichier pour voir son code coloré, comme dans le rapport local.
+5. Revenez sur la page du job (lien **embarq** en haut de la page). Un graphique **Coverage** montre l'évolution de la couverture d'un build à l'autre. Il n'apparaît qu'à partir de **deux** builds avec couverture : il se remplira au prochain push (étape 4).
 
 **Question 4.** Si un développeur ajoute du code sans test, que se passe-t-il dans le pipeline ? À quelle étape ?
 
