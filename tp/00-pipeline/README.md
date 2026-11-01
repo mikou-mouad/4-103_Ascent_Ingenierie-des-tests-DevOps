@@ -79,12 +79,17 @@ git config --global user.email "vous@exemple.fr"
 git config --global pull.rebase false
 git config --global credential.helper 'cache --timeout=36000'
 git remote add gitlab https://gitlab.com/<votre-espace>/embarq.git
-git push gitlab tp-00-pipeline
+git push -u gitlab tp-00-pipeline
 ```
 
 Les deux premières lignes donnent à Git votre nom et votre e-mail, inscrits dans chaque commit (mettez l'e-mail de votre compte gitlab.com) : sans elles, Git et VS Code refusent de commiter. La troisième dit à `git pull` de fusionner les corrections du formateur avec votre travail. La quatrième garde le jeton en mémoire pour la journée.
 
-Vous avez maintenant deux dépôts distants : `origin`, le dépôt GitHub du cours (en lecture seule pour vous), et `gitlab`, votre projet. Publiez toujours votre travail dans le terminal, avec `git push gitlab HEAD`. N'utilisez pas le bouton **Sync** de VS Code : il pousse vers `origin`, et échoue.
+> **Attention : deux dépôts distants, et le `-u`.**
+> Vous avez maintenant deux dépôts distants : `origin`, le dépôt GitHub du cours (en lecture seule pour vous), et `gitlab`, votre projet, qui déclenche le pipeline.
+> Une branche créée par `git checkout` **suit `origin`** : les boutons **Sync** et **Push** de VS Code partiraient vers GitHub, et échoueraient.
+> Le `-u` du `git push -u gitlab …` fait suivre **votre projet GitLab** à la branche. Ensuite, `git push`, **Sync** et **Push** vont vers GitLab.
+> Vérifiez avec `git branch -vv` : la ligne de la branche courante doit afficher `[gitlab/tp-00-pipeline]`.
+> **À chaque nouveau TP**, la nouvelle branche suit à nouveau `origin` : son premier push se fait avec `git push -u gitlab HEAD` (c'est écrit dans chaque « Point de départ »).
 
 Git demande un nom d'utilisateur (votre compte gitlab.com) et un mot de passe : collez le **jeton**.
 
@@ -236,4 +241,4 @@ git push gitlab tp-00-pipeline
 
 ## À garder pour la suite
 
-Laissez tourner le lab (`docker compose ps` dans `~/iroise/lab`) et l'environnement « dev » : les TP suivants s'en servent. Au début de chaque TP, après le `git checkout`, poussez la nouvelle branche sur gitlab.com (`git push gitlab HEAD`) : le pipeline construit le point de départ du TP.
+Laissez tourner le lab (`docker compose ps` dans `~/iroise/lab`) et l'environnement « dev » : les TP suivants s'en servent. Au début de chaque TP, après le `git checkout`, poussez la nouvelle branche sur gitlab.com avec `git push -u gitlab HEAD`, **avec le `-u`** (voir l'étape 2) : le pipeline construit le point de départ du TP.
