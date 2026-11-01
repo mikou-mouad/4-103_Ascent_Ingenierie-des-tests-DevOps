@@ -25,8 +25,10 @@
 cd ~/iroise && git fetch
 git stash -u
 git checkout tp-04-bdd
-git push gitlab HEAD
+git push -u gitlab HEAD     # -u : la branche suit votre projet GitLab, pas le dépôt du cours
 ```
+
+> **N'oubliez pas le `-u`** sur ce premier push. Sans lui, la nouvelle branche suit le dépôt GitHub du cours, et les boutons **Sync** et **Push** de VS Code partent au mauvais endroit. Vérifiez avec `git branch -vv` : la branche courante doit afficher `[gitlab/tp-04-bdd]`.
 
 Le code de Tom est dans la branche : `calculer(adultes, enfants, velos, resident)` dans `TarifService`, la case « Résident des îles » dans le formulaire. Ouvrez http://localhost:8090 après avoir redéployé (`mvn -B -q package -DskipTests && docker build -t embarq:local . && bash deploy/deployer.sh dev` dans `embarq/`) si vous voulez la voir.
 
