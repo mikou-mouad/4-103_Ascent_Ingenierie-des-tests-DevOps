@@ -121,7 +121,7 @@ sudo snap install intellij-idea-community --classic
 Récupérez le dépôt de la formation :
 
 ```bash
-git clone https://github.com/mikou-mouad/4-103_Ascent_Ingenierie-des-tests-DevOps.git ~/iroise
+git clone https://github.com/mikou-mouad/4-103_Ingenierie-des-tests-DevOps.git ~/iroise
 cd ~/iroise
 ```
 
