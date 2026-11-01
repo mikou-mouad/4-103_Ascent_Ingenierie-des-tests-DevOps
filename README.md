@@ -35,7 +35,7 @@ Elle ne contient rien du TP suivant : on peut consulter la correction sans déco
 Sur la machine du lab :
 
 ```bash
-git clone https://github.com/mikou-mouad/4-103_Ascent_Ingenierie-des-tests-DevOps.git ~/iroise
+git clone https://github.com/mikou-mouad/4-103_Ingenierie-des-tests-DevOps.git ~/iroise
 cd ~/iroise
 git checkout tp-00-pipeline
 ```
