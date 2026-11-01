@@ -154,3 +154,34 @@ Un participant bloqué consulte la correction, ou fait `git checkout tp-NN` pour
 | **Total** |                                              | **12 h**         | **11 h hors pauses (8 h 15)** + 1 h de pauses café |
 
 Les 12 h officielles comprennent les quatre pauses café de 15 minutes. Chaque module perd entre 5 et 15 minutes pour les absorber. Les travaux pratiques demandés par le programme sont tous couverts : analyse d'un pipeline (TP 00), stratégie de test (TP 01), indicateurs clés (TP 03), scénario Selenium (TP 05), documentation de test automatisé (TP 06), déploiement intégrant des tests (TP 07).
+
+## Correspondance détaillée : programme officiel, slides et TP
+
+Les numéros de slides suivent l'ordre du deck (`presentation/index.html`, 53 slides, sur la branche `main`).
+
+### Jour 1 – Fondamentaux DevOps et stratégies de test
+
+| Module officiel (durée) | Contenu du programme officiel | Chapitre et horaires | Slides | TP (branche) |
+|---|---|---|---|---|
+| **Introduction et rappel DevOps** (1 h 30) | CI, CD, infrastructure as code ; impact de la culture DevOps sur la gestion des tests ; *étude de cas : analyse d'un pipeline DevOps intégrant des tests* | Accueil 9h00 · Ch. 0 « Le correctif du vendredi », 9h15 – 10h30 | 8 `j1-debut` · 9 `c0-incident` · 10 `c0-solution` · 11 `c0-cicd` · 12 `c0-pipeline` · 13 `c0-tp` | **TP 00** (`tp-00-pipeline`) : le lab as code, GitLab qui déclenche Jenkins, **analyse du pipeline d'Embarq** |
+| **Stratégies de tests dans un contexte DevOps** (2 h 30) | Types de tests : unitaires, intégration, performance, end-to-end ; réduire la dette technique et maximiser la couverture ; *TP : élaboration d'une stratégie de test pour un projet fictif* | Ch. 1 « Plein tarif pour l'école de Molène », 10h45 – 13h20 | 15 `c1-incident` · 16 `c1-types` · 17 `c1-pyramide` · 18 `c1-strategie` · 19 `c1-tp` | **TP 01** (`tp-01-strategie`) : **stratégie de test d'Embarq** (matrice des risques), tests unitaires JUnit 5 |
+| | | Ch. 2 « 312 passagers pour 280 places », 13h20 – 14h05 | 21 `c2-incident` · 22 `c2-mock` · 23 `c2-perf` · 24 `c2-tp` | **TP 02** (`tp-02-integration`) : tests d'intégration (Testcontainers), test de performance (k6) |
+| **Introduction à la culture du test** (2 h) | La qualité dès les premières étapes ; collaboration entre développement, test et opérations ; *TP : définir des indicateurs clés pour la qualité des tests* | Ch. 3 « On est prêts pour la saison ? », 14h05 – 15h50 · Bilan 15h50 | 25 `c3-incident` · 26 `c3-culture` · 27 `c3-indicateurs` · 28 `c3-tp` · 30 `fin-j1` | **TP 03** (`tp-03-indicateurs`) : couverture JaCoCo, quality gate, test instable, **tableau des indicateurs qualité** |
+
+### Jour 2 – Automatisation et déploiement
+
+| Module officiel (durée) | Contenu du programme officiel | Chapitre et horaires | Slides | TP (branche) |
+|---|---|---|---|---|
+| **Automatisation et industrialisation des tests** (3 h) | Outils et frameworks : Selenium, JUnit, Cucumber, Jenkins ; approche shift-left ; *TP : automatisation d'un scénario de test avec Selenium* | Récap 9h00 · Ch. 4 « Ce n'est pas ce que je voulais », 9h10 – 10h30 | 31 `j2-debut` · 32 `c4-incident` · 33 `c4-outils` · 34 `c4-shiftleft` · 35 `c4-gherkin` · 36 `c4-tp` | **TP 04** (`tp-04-bdd`) : **shift-left**, scénarios **Cucumber** écrits avant le code, rapport dans Jenkins |
+| | | Ch. 5 « Deux jours à recliquer », 10h45 – 12h00 | 38 `c5-incident` · 39 `c5-webdriver` · 40 `c5-pageobject` · 41 `c5-tp` | **TP 05** (`tp-05-selenium`) : **automatisation du scénario de réservation avec Selenium**, Grid, étape end-to-end du pipeline |
+| **Documentation et maintenance des tests** (1 h 30) | Bonnes pratiques pour documenter les cas de test et leur exécution ; gestion des tests dans des environnements évolutifs ; *TP : rédiger une documentation de test automatisé* | Ch. 6 « Inès est en congés », 13h00 – 14h20 | 43 `c6-incident` · 44 `c6-cas-de-test` · 45 `c6-maintenance` · 46 `c6-tp` | **TP 06** (`tp-06-documentation`) : tests cassés par une refonte, sélecteurs `data-testid`, **cas de test et guide d'exécution documentés** |
+| **Méthodes de déploiement applicatives** (1 h 30) | Déploiement continu avec des pipelines CI/CD ; gestion des tests en préproduction et en production ; *TP : mise en place d'un déploiement applicatif intégrant des tests automatisés* | Ch. 7 « Livrer le 1er avril », 14h20 – 15h45 · Bilan 15h45 | 47 `c7-incident` · 48 `c7-pipeline` · 49 `c7-rollback` · 51 `c7-tp` · 52 `epilogue` · 53 `fin` | **TP 07** (`tp-07-deploiement`) : **préprod, smoke tests, approbation, production, rollback** |
+
+### Slides communes à toute la formation
+
+| Rôle | Slides |
+|---|---|
+| Introduction (fil rouge, programme, branches, lab) | 1 `cover` · 2 `iroise` · 3 `personnages` · 4 `principe` · 5 `programme` · 6 `branches` · 7 `lab` |
+| Pauses et déjeuners, à l'heure du programme | 14 `pause-j1-matin` (10h30) · 20 `dej-j1` (12h00) · 29 `pause-j1-aprem` (14h30) · 37 `pause-j2-matin` (10h30) · 42 `dej-j2` (12h00) · 50 `pause-j2-aprem` (14h30) |
+
+Les outils cités par le programme officiel sont tous pratiqués : JUnit dès le TP 01, Jenkins dès le TP 00, Cucumber au TP 04, Selenium aux TP 05 et 06, GitLab CI/CD et Docker dans tous les TP.
