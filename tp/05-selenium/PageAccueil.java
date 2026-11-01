@@ -22,6 +22,8 @@ public class PageAccueil {
         // TODO : trouver le premier lien « Réserver » et cliquer dessus.
         //        Inspectez la page dans Firefox (clic droit > Inspecter) : quel attribut repère ces liens ?
         //        Exemple de sélecteur CSS : By.cssSelector("a[id^='reserver-']") (id qui commence par reserver-)
-        return new PageReservation(navigateur);
+        //        Puis supprimez la ligne « throw » ci-dessous.
+        throw new UnsupportedOperationException("TODO : PageAccueil.reserverLaPremiereTraversee");
+        // return new PageReservation(navigateur);
     }
 }
