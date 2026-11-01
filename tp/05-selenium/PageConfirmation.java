@@ -13,7 +13,9 @@ public class PageConfirmation {
 
     PageConfirmation(WebDriver navigateur) {
         this.navigateur = navigateur;
-        // TODO : attendre (10 s au plus) que la référence soit visible, comme dans le constructeur de PageReservation
+        // TODO : attendre (10 s au plus) que la référence soit visible, comme dans le constructeur de PageReservation,
+        //        puis supprimez la ligne « throw ».
+        throw new UnsupportedOperationException("TODO : constructeur de PageConfirmation");
     }
 
     public String reference() {
@@ -21,12 +23,12 @@ public class PageConfirmation {
     }
 
     public String montant() {
-        // TODO
-        return null;
+        // TODO : lire le texte de l'élément montant, puis supprimez la ligne « throw ».
+        throw new UnsupportedOperationException("TODO : PageConfirmation.montant");
     }
 
     public String statut() {
-        // TODO
-        return null;
+        // TODO : lire le texte de l'élément statut, puis supprimez la ligne « throw ».
+        throw new UnsupportedOperationException("TODO : PageConfirmation.statut");
     }
 }
