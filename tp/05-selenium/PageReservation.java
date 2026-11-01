@@ -22,14 +22,17 @@ public class PageReservation {
 
     public PageReservation saisir(String nom, String email, int adultes, int enfants, int velos) {
         remplir(By.id("nom"), nom);
-        // TODO : remplir l'e-mail, le nombre d'adultes, d'enfants et de vélos (inspectez les id des champs)
-        return this;
+        // TODO : remplir l'e-mail, le nombre d'adultes, d'enfants et de vélos (inspectez les id des champs),
+        //        puis supprimez la ligne « throw » ci-dessous.
+        throw new UnsupportedOperationException("TODO : PageReservation.saisir");
+        // return this;
     }
 
     /** Valide un formulaire correct : on arrive sur la confirmation. */
     public PageConfirmation valider() {
-        // TODO : cliquer sur le bouton « Valider la réservation »
-        return new PageConfirmation(navigateur);
+        // TODO : cliquer sur le bouton « Valider la réservation », puis supprimez la ligne « throw ».
+        throw new UnsupportedOperationException("TODO : PageReservation.valider");
+        // return new PageConfirmation(navigateur);
     }
 
     /** Valide un formulaire incorrect : on reste sur le formulaire, avec des messages d'erreur. */
