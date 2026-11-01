@@ -46,7 +46,7 @@ Seuils : moins de 1 % d'erreurs, 95 % des réponses en moins de 500 ms.
 |----------|-----------|------------------------------|
 | Tests unitaires, Cucumber, intégration, end-to-end | `target/surefire-reports/`, `target/failsafe-reports/` | **Tests** (noms lisibles, avec les identifiants CT-…) |
 | Scénarios Cucumber | `target/cucumber/rapport.html` | **Scénarios Cucumber** |
-| Couverture | `target/site/jacoco/index.html` | **Coverage Report** |
+| Couverture | `target/site/jacoco/index.html` | **Coverage** |
 | Indicateurs | `bash ci/indicateurs.sh` | évolution sur la page du job |
 
 ## Quand un test échoue
