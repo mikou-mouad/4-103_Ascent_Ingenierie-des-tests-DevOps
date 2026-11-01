@@ -172,6 +172,8 @@ for i in $(seq 20); do mvn -q -o test -Dtest=GenerateurReferenceTest > /dev/null
 
 Corrigez `GenerateurReference` : une référence de la forme `IR-` suivie de 8 caractères tirés de l'alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (sans 0, O, 1, I ni L, qu'on confond au téléphone). Utilisez `java.security.SecureRandom`. Adaptez les deux tests : le format, et 1 000 références toutes différentes. Relancez la boucle : 20 réussites.
 
+Il y a **deux** fichiers à modifier : `src/main/java/…/reservation/GenerateurReference.java` (le code) et `src/test/java/…/reservation/GenerateurReferenceTest.java` (le test). Avec le nouveau test seul, la boucle donne 20 échecs sur 20 : le test attend des références sur 8 caractères que l'ancien code ne fabrique pas. C'est normal, c'est un test rouge qui attend la correction du code. Si vous reprenez la correction (`solutions/03-indicateurs/`), copiez les deux fichiers.
+
 ```bash
 cd ~/iroise
 git add embarq
