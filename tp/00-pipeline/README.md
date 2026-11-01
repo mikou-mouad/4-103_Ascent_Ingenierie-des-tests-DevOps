@@ -57,7 +57,13 @@ Ouvrez http://localhost:8090 dans Firefox, et réservez une traversée pour 2 ad
 ## Étape 2 – Votre projet sur gitlab.com (10 min)
 
 1. Connectez-vous à https://gitlab.com.
-2. Créez un jeton d'accès : avatar > **Edit profile** > **Access tokens** > **Add new token**. Nom `lab`, portée **write_repository**. Copiez le jeton (il ne s'affiche qu'une fois).
+2. Créez un jeton d'accès, qui servira de mot de passe pour `git push` :
+   - avatar en haut à droite > **Edit profile** ;
+   - dans le menu de gauche, **Access** > **Personal access tokens** ;
+   - **Generate token** > **Legacy token** (un « Fine-grained token » demande de choisir un projet, qui n'existe pas encore) ;
+   - **Token name** : `lab` ; **Expiration date** : après la fin de la formation ;
+   - cochez seulement la portée **write_repository** ;
+   - **Generate token**, puis copiez le jeton tout de suite et gardez-le dans un fichier : il ne s'affiche qu'une fois.
 3. Créez un projet : **New project** > **Create blank project**. Nom `embarq`, visibilité **Public**, **décochez** « Initialize repository with a README ».
 
 Le projet doit être public : Jenkins le clone sans mot de passe.
