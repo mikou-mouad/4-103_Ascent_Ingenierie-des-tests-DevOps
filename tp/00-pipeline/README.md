@@ -121,7 +121,16 @@ Ouvrez http://localhost:8080 et connectez-vous avec `admin` et votre mot de pass
 
 **Question 4.** Comment Jenkins sait-il quel dépôt cloner et quel fichier lire pour connaître les étapes du pipeline ?
 
-Créez un jeton d'API Jenkins pour GitLab : en haut à droite, **admin** > **Security** > **API Token** > **Add new Token**, nom `gitlab`, **Generate**. Copiez le jeton.
+Créez un jeton d'API Jenkins pour GitLab : en haut à droite, **admin** > **Security** > **API Token** > **Add new Token**, nom `gitlab`, **Generate**. Copiez le jeton : il ne s'affiche qu'une fois.
+
+Vérifiez-le tout de suite, avant de le donner à GitLab :
+
+```bash
+curl -s -o /dev/null -w "%{http_code}
+" -u admin:<jeton-api-jenkins> http://localhost:8080/api/json
+```
+
+`200` : le jeton est bon. `401` : il est faux (ou c'est le mot de passe qui a été copié) ; créez-en un autre.
 
 ## Étape 4 – GitLab déclenche Jenkins (15 min)
 
@@ -130,7 +139,7 @@ Créez un jeton d'API Jenkins pour GitLab : en haut à droite, **admin** > **Sec
 | Clé | Valeur | Options |
 |-----|--------|---------|
 | `JENKINS_USER` | `admin` | décochez **Protect variable** |
-| `JENKINS_TOKEN` | le jeton d'API Jenkins | visibilité **Masked**, décochez **Protect variable** |
+| `JENKINS_TOKEN` | le jeton d'API Jenkins (pas le mot de passe de `.env`) | visibilité **Masked**, décochez **Protect variable** |
 
 Une variable protégée n'est transmise qu'aux branches protégées. Les branches des TP ne le sont pas : il faut décocher **Protect variable**.
 
@@ -139,7 +148,7 @@ Une variable protégée n'est transmise qu'aux branches protégées. Les branche
 - **Tags** : `embarq` ;
 - **Create runner**, puis copiez la commande de l'étape 1 proposée par GitLab (`gitlab-runner register --url https://gitlab.com --token glrt-…`).
 
-Lancez-la avec `sudo`, et répondez :
+Lancez-la **avec `sudo`** : la configuration va alors dans `/etc/gitlab-runner/config.toml`, celle que lit le service du runner. Sans `sudo`, elle irait dans votre dossier personnel, et le service ne verrait pas votre runner. Répondez :
 
 ```bash
 sudo gitlab-runner register --url https://gitlab.com --token glrt-…
@@ -153,7 +162,10 @@ sudo gitlab-runner register --url https://gitlab.com --token glrt-…
 
 ```bash
 sudo gitlab-runner verify
+sudo gitlab-runner status
 ```
+
+`status` doit afficher `Service is running` : le runner tourne en service, en arrière-plan. Ne lancez pas `gitlab-runner run` dans le terminal.
 
 Dans GitLab, le runner apparaît en vert. Retournez dans **Build** > **Pipelines** : le pipeline en attente démarre. Ouvrez le job **jenkins** : sa console recopie celle de Jenkins. Ouvrez aussi le job dans Jenkins (http://localhost:8080/job/embarq/) et regardez les étapes s'enchaîner.
 
