@@ -75,7 +75,7 @@ stage('Tests d\'intégration') {
     }
     post {
         always {
-            junit 'embarq/target/failsafe-reports/*.xml'
+            junit 'embarq/target/failsafe-reports/TEST-*IT.xml'
         }
     }
 }
@@ -87,6 +87,8 @@ git add embarq
 git commit -m "Surbooking : les enfants et les annulations comptent, test d'intégration"
 git push gitlab HEAD
 ```
+
+Le motif `TEST-*IT.xml` n'enregistre que les rapports des tests d'intégration : plus tard, les tests end-to-end écriront aussi dans `failsafe-reports/`, et chaque étape doit n'enregistrer que ses propres tests.
 
 Dans Jenkins, la vue des étapes montre la nouvelle étape, et le rapport de tests compte les tests d'intégration.
 
