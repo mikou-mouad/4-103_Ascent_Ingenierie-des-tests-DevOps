@@ -22,8 +22,10 @@
 cd ~/iroise && git fetch
 git stash -u
 git checkout tp-02-integration
-git push gitlab HEAD
+git push -u gitlab HEAD     # -u : la branche suit votre projet GitLab, pas le dépôt du cours
 ```
+
+> **N'oubliez pas le `-u`** sur ce premier push. Sans lui, la nouvelle branche suit le dépôt GitHub du cours, et les boutons **Sync** et **Push** de VS Code partent au mauvais endroit. Vérifiez avec `git branch -vv` : la branche courante doit afficher `[gitlab/tp-02-integration]`.
 
 ## Étape 1 – Le test d'intégration (15 min)
 
