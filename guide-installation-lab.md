@@ -4,6 +4,22 @@ Ce guide prépare **la machine d'un participant**. Il se fait **la veille de la 
 
 Le lab lui-même (Jenkins et Selenium Grid) est décrit comme du code dans `lab/` : on le démarre pendant le TP 00.
 
+## En une commande
+
+Le script `lab/preparer-machine.sh` fait les sections 3 à 8 de ce guide. Lancez-le avec le compte du participant (pas root), qui doit pouvoir utiliser `sudo` :
+
+```bash
+sudo apt-get update && sudo apt-get install -y git
+git clone https://github.com/mikou-mouad/4-103_Ingenierie-des-tests-DevOps.git ~/iroise
+bash ~/iroise/lab/preparer-machine.sh --vscode
+```
+
+`--vscode` installe VS Code, `--intellij` installe IntelliJ IDEA Community. Comptez 20 à 40 minutes selon le réseau : la dernière étape construit la solution finale avec tous ses tests, ce qui télécharge les dépendances Maven et vérifie que Docker et Testcontainers fonctionnent. Le script peut être relancé sans risque.
+
+À la fin, **fermez la session Ubuntu et rouvrez-la** (ou redémarrez), puis vérifiez que `docker ps` fonctionne sans `sudo`. Si le terminal affiche des logs à chaque commande, appliquez aussi la section 2.
+
+Les sections suivantes détaillent ce que fait le script, pour une installation à la main ou un dépannage.
+
 ## 1. La machine
 
 Une machine par participant, avec les droits administrateur (`sudo`).
