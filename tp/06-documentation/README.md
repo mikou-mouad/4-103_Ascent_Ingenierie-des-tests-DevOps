@@ -101,7 +101,21 @@ final class TestId {
 
 Dans `PageAccueil`, `PageReservation` et `PageConfirmation`, remplacez tous les `By.id(…)`, `By.cssSelector(…)` et `By.xpath(…)` par `testId(…)` (avec `import static fr.iroise.embarq.e2e.TestId.testId;`). Pour `reserverSur(navire)`, parcourez les cartes `traversee` et gardez celle dont le `navire` a le bon texte.
 
-Reconstruisez l'image, redéployez dev, relancez les tests : tout doit être vert.
+Vos pages ont changé : il faut reconstruire le jar, **puis** l'image, puis redéployer. Le `Dockerfile` ne compile rien, il copie `target/embarq.jar` tel qu'il est : une image construite avant `mvn package` contiendrait encore les anciennes pages.
+
+```bash
+cd ~/iroise/embarq
+mvn -B -q package -DskipTests
+docker build -t embarq:local .
+bash deploy/deployer.sh dev
+curl -s http://localhost:8090/ | grep -c 'data-testid="reserver"'
+```
+
+Le `grep` doit afficher un nombre supérieur à 0 (un lien « Réserver » par traversée). S'il affiche `0`, l'application déployée n'a pas vos `data-testid` : vérifiez les pages, puis recommencez dans cet ordre. Relancez ensuite les tests : tout doit être vert.
+
+```bash
+mvn -B -Pe2e verify -Dapp.url=http://embarq-dev:8080
+```
 
 **Question 3.** L'agence change à nouveau la couleur des boutons, remplace les cartes par un tableau et renomme les `id`. Que faut-il modifier dans les tests ?
 
