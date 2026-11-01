@@ -47,7 +47,7 @@ sudo apt-get install -y -q git curl jq openjdk-21-jdk maven ca-certificates
 etape "2/8 Docker (dépôt officiel)"
 if ! command -v docker > /dev/null; then
   sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  sudo curl -fsSL --connect-timeout 20 --retry 3 https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
     | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   sudo apt-get update -q
@@ -58,9 +58,13 @@ fi
 sudo usermod -aG docker "$USER"
 
 etape "3/8 GitLab Runner"
+# Binaire officiel plutôt que le dépôt apt de packages.gitlab.com, qui peut rester bloqué sans rien afficher
 if ! command -v gitlab-runner > /dev/null; then
-  curl -fsSL https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
-  sudo apt-get install -y -q gitlab-runner
+  sudo curl -fL --connect-timeout 20 --retry 3 -o /usr/local/bin/gitlab-runner     "https://s3.dualstack.us-east-1.amazonaws.com/gitlab-runner-downloads/latest/binaries/gitlab-runner-linux-amd64"
+  sudo chmod +x /usr/local/bin/gitlab-runner
+  id gitlab-runner > /dev/null 2>&1 || sudo useradd --create-home --shell /bin/bash gitlab-runner
+  sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+  sudo gitlab-runner start
 else
   echo "GitLab Runner est déjà installé."
 fi
