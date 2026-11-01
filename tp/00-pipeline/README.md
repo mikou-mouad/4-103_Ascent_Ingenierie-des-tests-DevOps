@@ -74,10 +74,14 @@ Ajoutez gitlab.com comme second dépôt distant, avec cette adresse, puis pousse
 
 ```bash
 cd ~/iroise
+git config --global user.name "Prénom Nom"
+git config --global user.email "vous@exemple.fr"
 git config --global credential.helper 'cache --timeout=36000'
 git remote add gitlab https://gitlab.com/<votre-espace>/embarq.git
 git push gitlab tp-00-pipeline
 ```
+
+Les deux premières lignes donnent à Git votre nom et votre e-mail, inscrits dans chaque commit (mettez l'e-mail de votre compte gitlab.com) : sans elles, Git et VS Code refusent de commiter. La troisième garde le jeton en mémoire pour la journée.
 
 Git demande un nom d'utilisateur (votre compte gitlab.com) et un mot de passe : collez le **jeton**.
 
