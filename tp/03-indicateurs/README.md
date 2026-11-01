@@ -99,7 +99,34 @@ Descendez dans les paquetages, jusqu'au code coloré : vert = exécuté, rouge =
 
 **Question 3.** `TarifService` est à 100 %. Au TP 01, avant votre test paramétré, l'était-il déjà ? Le bug du tarif de groupe y était-il quand même ?
 
-**Le seuil.** Une couverture minimale de 60 % bloque le pipeline aujourd'hui. Deux options : écrire des tests tout de suite, ou fixer le seuil au niveau actuel pour qu'il **ne baisse plus**, puis le remonter à chaque nouveau test. Choisissez la seconde : remplacez `0.60` par `0.45`, et relancez `mvn -B clean verify` jusqu'au `BUILD SUCCESS`.
+**Le seuil.** Avec 60 % de couverture minimale, le build échoue : Embarq n'est couvert qu'à 49 %. Deux options :
+
+- écrire des tests tout de suite, jusqu'à dépasser 60 % ;
+- ou fixer le seuil **au niveau actuel**, pour que la couverture **ne baisse plus**, puis le remonter à chaque nouveau test. C'est un « cliquet ».
+
+Choisissez la seconde option :
+
+1. Ouvrez `embarq/pom.xml` dans votre éditeur.
+2. Dans le plugin `jacoco-maven-plugin` que vous venez d'ajouter, trouvez l'exécution `seuil`, puis la ligne `<minimum>` :
+
+   ```xml
+   <execution>
+     <id>seuil</id>
+     …
+             <minimum>0.60</minimum>
+   ```
+
+3. Remplacez `0.60` par `0.45` (45 % des lignes), puis enregistrez le fichier.
+4. Relancez la construction complète :
+
+   ```bash
+   cd ~/iroise/embarq
+   mvn -B clean verify
+   ```
+
+5. Vérifiez la fin de la sortie : `All coverage checks have been met.`, puis `BUILD SUCCESS`.
+
+Si le build échoue encore, relisez la valeur dans `pom.xml` (un point, pas une virgule : `0.45`). Le seuil est maintenant dans le `pom.xml` : il s'appliquera aussi dans Jenkins, dès que vous pousserez à l'étape 3.
 
 ## Étape 3 – La couverture dans le pipeline (10 min)
 
