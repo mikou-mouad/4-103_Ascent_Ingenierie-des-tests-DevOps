@@ -136,7 +136,16 @@ Suivez le build jusqu'au bout, et approuvez la mise en production.
 
 **Question 5.** Quelle version tourne en production à la fin du build ? Vérifiez sur http://localhost:8082/actuator/info. Les passagers ont-ils été privés de réservation ?
 
-Corrigez `application-prod.properties`, poussez, approuvez : la nouvelle version arrive en production.
+L'échec en production est le résultat attendu de cette étape. Vérifiez d'abord que le rollback a fonctionné : http://localhost:8082 répond toujours, et http://localhost:8082/actuator/info affiche la version précédente.
+
+Trouvez ensuite la coquille de Tom dans `embarq/src/main/resources/application-prod.properties`. Elle ne se voit presque pas à l'œil nu : faites afficher chaque caractère.
+
+```bash
+cd ~/iroise/embarq
+grep pool-size src/main/resources/application-prod.properties | od -c
+```
+
+Corrigez-la, puis commitez, poussez (`git push gitlab HEAD`) et approuvez : la nouvelle version arrive en production.
 
 **Question 6.** L'erreur n'a été vue qu'en production. Que faudrait-il changer pour la voir avant ?
 
