@@ -115,7 +115,31 @@ git push gitlab HEAD
 
 Dans Jenkins, ouvrez le build, puis **Tests** : vos tests paramétrés apparaissent, un par cas.
 
-**6. Et la capacité des navires ?** Dans `ReservationServiceTest`, ajoutez un test : le Molenez (12 places) a déjà 10 places réservées, une famille demande 1 adulte et 2 enfants ; la réservation doit être refusée.
+**6. Et la capacité des navires ?** Ouvrez `embarq/src/test/java/fr/iroise/embarq/reservation/ReservationServiceTest.java`.
+
+Pour savoir combien de places sont déjà vendues, `ReservationService` interroge la base avec `reservations.placesReservees(...)`. Dans ce test, la base est remplacée par un **mock** Mockito : c'est le test qui décide de ce qu'elle répond (`when(…).thenReturn(…)`). Le Molenez (12 places) est déjà préparé en haut de la classe, avec l'id `7L`.
+
+Le scénario : le Molenez a déjà **10 places vendues**, une famille demande **1 adulte et 2 enfants** (3 places, il en reste 2). La réservation doit être refusée, et rien ne doit être enregistré. Ajoutez ce test à la fin de la classe, en vous inspirant de `reservation_refusee_quand_la_traversee_est_complete`, et complétez les deux `TODO` :
+
+```java
+@Test
+void les_enfants_comptent_dans_la_capacite() {
+    // 1. Le mock répond que 10 places sont déjà vendues
+    when(reservations.placesReservees(any())).thenReturn(10L);
+
+    // 2. Une famille de 1 adulte et 2 enfants doit être refusée
+    // TODO : dans assertThatThrownBy(() -> service.reserver(7L, new DemandeReservation(...))),
+    //        vérifier que l'exception est une TraverseeComplete
+
+    // 3. Rien n'a été enregistré
+    // TODO : verify(…, never()).save(any());
+}
+```
+
+```bash
+cd ~/iroise/embarq
+mvn -B test -Dtest=ReservationServiceTest
+```
 
 **Question 6.** Le test passe. Ce test prouve-t-il qu'Embarq compte correctement les places déjà vendues ? Qu'est-ce qui, dans ce test, décide du nombre de places réservées ?
 
