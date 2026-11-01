@@ -163,7 +163,23 @@ git commit -m "Tests end-to-end sur data-testid, cas de test et guide d'exécuti
 git push gitlab HEAD
 ```
 
-Dans Jenkins, ouvrez **Tests** : les noms sont des phrases. Dans GitLab, ouvrez `embarq/docs/` : les pages Markdown sont mises en forme.
+Quand le pipeline est vert, regardez ce que votre documentation est devenue :
+
+**Dans Jenkins : les noms des tests.**
+
+1. Ouvrez http://localhost:8080/job/embarq/, puis le dernier build (en bas à gauche, **Builds**).
+2. Dans le menu de gauche du build, cliquez sur **Tests**.
+3. Dans la liste, ouvrez **Parcours de réservation (navigateur)** : les tests end-to-end s'appellent maintenant `CT-E2E-01 · Une famille réserve une traversée et reçoit sa référence`, et non plus `un_passager_reserve_une_traversee_en_famille`. Les tests sans `@DisplayName` gardent leur nom de méthode.
+
+Avec l'identifiant `CT-E2E-01`, on passe du rapport de Jenkins à la fiche du cas de test, et inversement.
+
+**Dans GitLab : les documents.**
+
+1. Ouvrez votre projet `embarq` sur gitlab.com, puis **Code** > **Repository** dans le menu de gauche.
+2. Dans la liste des branches, en haut, choisissez `tp-06-documentation`.
+3. Ouvrez le dossier `embarq`, puis `docs`, puis `cas-de-test.md` et `tests.md`.
+
+GitLab affiche le Markdown mis en forme : titres, tableaux, liens entre les deux documents. Le bouton **Display source** montre le texte brut, celui que vous avez écrit. La documentation vit avec le code : chaque branche a la sienne, et elle se relit dans les mêmes demandes de fusion.
 
 **Question 4.** Qu'est-ce qu'une « documentation vivante » ? Lesquels de vos documents le sont, lesquels ne le sont pas ?
 
