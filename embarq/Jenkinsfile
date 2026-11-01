@@ -18,7 +18,8 @@ pipeline {
         stage('Compilation') {
             steps {
                 dir('embarq') {
-                    sh 'mvn -B compile'
+                    // clean : chaque build repart de zéro, mesures de couverture comprises
+                    sh 'mvn -B clean compile'
                 }
             }
         }
