@@ -138,8 +138,7 @@ GitLab va appeler Jenkins : il lui faut un jeton **Jenkins**. Ne le confondez pa
 Vérifiez-le tout de suite, avant de le donner à GitLab :
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}
-" -u admin:<jeton-api-jenkins> http://localhost:8080/api/json
+curl -s -o /dev/null -w "%{http_code}" -u admin:<jeton-api-jenkins> http://localhost:8080/api/json; echo
 ```
 
 `200` : le jeton est bon. `401` : il est faux (ou c'est le mot de passe qui a été copié) ; créez-en un autre.
