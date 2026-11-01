@@ -169,7 +169,7 @@ Quand le pipeline est vert, regardez ce que votre documentation est devenue :
 
 1. Ouvrez http://localhost:8080/job/embarq/, puis le dernier build (en bas à gauche, **Builds**).
 2. Dans le menu de gauche du build, cliquez sur **Tests**.
-3. Dans la liste, ouvrez **Parcours de réservation (navigateur)** : les tests end-to-end s'appellent maintenant `CT-E2E-01 · Une famille réserve une traversée et reçoit sa référence`, et non plus `un_passager_reserve_une_traversee_en_famille`. Les tests sans `@DisplayName` gardent leur nom de méthode.
+3. Dans la liste des paquetages, cliquez sur **(root)**, puis sur **Parcours de réservation (navigateur)**. Un nom en phrase n'a pas de paquetage Java (pas de point) : Jenkins range donc ces tests, et les scénarios Cucumber, sous **(root)**. Vous y voyez que les tests end-to-end s'appellent maintenant `CT-E2E-01 · Une famille réserve une traversée et reçoit sa référence`, et non plus `un_passager_reserve_une_traversee_en_famille`. Les tests sans `@DisplayName` gardent leur nom de méthode.
 
 Avec l'identifiant `CT-E2E-01`, on passe du rapport de Jenkins à la fiche du cas de test, et inversement.
 
