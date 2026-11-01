@@ -109,9 +109,14 @@ docker compose version
 
 Le runner reçoit les jobs GitLab et les exécute sur la machine. On l'installe ici, on l'enregistre pendant le TP 00.
 
+On utilise le binaire officiel : le dépôt apt de `packages.gitlab.com` peut rester bloqué sans rien afficher.
+
 ```bash
-curl -fsSL https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
-sudo apt-get install -y gitlab-runner
+sudo curl -fL --connect-timeout 20 -o /usr/local/bin/gitlab-runner "https://s3.dualstack.us-east-1.amazonaws.com/gitlab-runner-downloads/latest/binaries/gitlab-runner-linux-amd64"
+sudo chmod +x /usr/local/bin/gitlab-runner
+id gitlab-runner || sudo useradd --create-home --shell /bin/bash gitlab-runner
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
 sudo rm -f /home/gitlab-runner/.bash_logout
 gitlab-runner --version
 ```
