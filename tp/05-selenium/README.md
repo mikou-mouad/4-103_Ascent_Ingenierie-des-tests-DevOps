@@ -71,7 +71,7 @@ Une classe par page, qui connaît la structure de la page (les sélecteurs) et o
 | `PageConfirmation` | « Bon voyage ! » |
 | `ReservationE2E` | Les tests : ils n'utilisent que les Page Objects, jamais de sélecteur |
 
-Complétez les `TODO` des trois pages, avec les `id` notés à l'étape 1 :
+Complétez les `TODO` des trois pages, avec les `id` notés à l'étape 1. Tant qu'un `TODO` n'est pas fait, sa méthode lève `UnsupportedOperationException("TODO : …")` : le test échoue en vous disant quoi compléter. Supprimez la ligne `throw` (et décommentez le `return`) une fois le `TODO` écrit.
 
 | Fichier | Méthode | À faire |
 |---------|---------|---------|
@@ -92,7 +92,7 @@ new WebDriverWait(navigateur, Duration.ofSeconds(10))
 
 ## Étape 3 – Les tests (15 min)
 
-Complétez les deux `TODO` de `ReservationE2E`, puis lancez les tests end-to-end, **en regardant l'onglet 7900** :
+Complétez les deux `TODO` de `ReservationE2E` (et supprimez leurs lignes `fail(…)` : un test vide passerait toujours, sans rien vérifier), puis lancez les tests end-to-end, **en regardant l'onglet 7900** :
 
 ```bash
 cd ~/iroise/embarq
