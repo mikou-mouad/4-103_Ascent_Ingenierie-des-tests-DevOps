@@ -71,7 +71,17 @@ Une classe par page, qui connaît la structure de la page (les sélecteurs) et o
 | `PageConfirmation` | « Bon voyage ! » |
 | `ReservationE2E` | Les tests : ils n'utilisent que les Page Objects, jamais de sélecteur |
 
-Complétez les `TODO` des trois pages. Pour attendre qu'un élément soit visible :
+Complétez les `TODO` des trois pages, avec les `id` notés à l'étape 1 :
+
+| Fichier | Méthode | À faire |
+|---------|---------|---------|
+| `PageAccueil` | `reserverLaPremiereTraversee` | Trouver le premier lien « Réserver » et cliquer dessus (`findElement(…).click()`). |
+| `PageReservation` | `saisir` | Remplir l'e-mail, les adultes, les enfants et les vélos, sur le modèle de la ligne `nom` (`String.valueOf(…)` pour les nombres). |
+| `PageReservation` | `valider` | Cliquer sur le bouton « Valider la réservation ». |
+| `PageConfirmation` | constructeur | Attendre que la référence soit affichée (voir ci-dessous). |
+| `PageConfirmation` | `montant`, `statut` | Lire le texte de l'élément, sur le modèle de `reference()`. |
+
+**L'attente du constructeur de `PageConfirmation`.** Après le clic sur « Valider », le navigateur charge la page de confirmation : cela prend un peu de temps. Si le test lit la référence tout de suite, la page n'est pas encore là, et Selenium lève `NoSuchElementException`. Remplacez le `TODO` du constructeur par ces deux lignes, qui attendent au plus 10 secondes que l'élément `reference` soit visible (le constructeur de `PageReservation` fait la même chose avec le bouton `valider`) :
 
 ```java
 new WebDriverWait(navigateur, Duration.ofSeconds(10))
