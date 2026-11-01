@@ -23,8 +23,10 @@
 cd ~/iroise && git fetch
 git stash -u
 git checkout tp-03-indicateurs
-git push gitlab HEAD
+git push -u gitlab HEAD     # -u : la branche suit votre projet GitLab, pas le dépôt du cours
 ```
+
+> **N'oubliez pas le `-u`** sur ce premier push. Sans lui, la nouvelle branche suit le dépôt GitHub du cours, et les boutons **Sync** et **Push** de VS Code partent au mauvais endroit. Vérifiez avec `git branch -vv` : la branche courante doit afficher `[gitlab/tp-03-indicateurs]`.
 
 ## Étape 1 – Mesurer la couverture (10 min, avant la pause)
 
