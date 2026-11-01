@@ -183,7 +183,11 @@ git push gitlab HEAD
 
 ## Étape 5 – Les indicateurs d'Embarq (20 min)
 
-Le script `embarq/ci/indicateurs.sh` calcule des indicateurs à partir de l'API de Jenkins. Lancez-le avec votre jeton d'API Jenkins (celui du TP 00) :
+Le script `embarq/ci/indicateurs.sh` calcule des indicateurs à partir de l'API de Jenkins. Il lui faut votre **jeton d'API Jenkins**, celui du TP 00.
+
+Vous ne l'avez plus sous la main ? Il est rangé dans votre projet GitLab : **Settings** > **CI/CD** > **Variables**, ligne `JENKINS_TOKEN`. Cliquez sur **Reveal values** (ou sur le crayon de la ligne) pour l'afficher, puis copiez la valeur.
+
+Lancez ensuite le script, en remplaçant `<votre-jeton>` :
 
 ```bash
 cd ~/iroise/embarq
