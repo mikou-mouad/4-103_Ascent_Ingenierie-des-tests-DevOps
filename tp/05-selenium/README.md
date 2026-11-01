@@ -29,28 +29,30 @@ git push -u gitlab HEAD     # -u : la branche suit votre projet GitLab, pas le d
 
 Ce qui est nouveau dans la branche :
 
-- le `Jenkinsfile` construit l'**image Docker** d'Embarq (`embarq:1.0.<numéro du build>`), puis la déploie dans l'environnement **e2e** (`deploy/deployer.sh e2e`), supprimé à la fin du build ;
+- le `Jenkinsfile` construit l'**image Docker** d'Embarq (`embarq:1.0.<numéro du build>`), puis la déploie dans l'environnement **e2e** (`deploy/deployer.sh e2e`), supprimé à la fin du build : cet environnement est réservé au pipeline ;
 - `src/test/java/fr/iroise/embarq/e2e/TestEndToEnd.java` : la base des tests end-to-end, qui ouvre un navigateur Chrome sur la Selenium Grid avant chaque test.
 
 ## Étape 1 – Préparer le terrain (10 min)
 
-Déployez l'environnement e2e sur votre machine, avec la version courante :
+Déployez l'environnement **dev** sur votre machine, avec la version courante :
 
 ```bash
 cd ~/iroise/embarq
 mvn -B -q package -DskipTests
 docker build -t embarq:local .
-bash deploy/deployer.sh e2e
+bash deploy/deployer.sh dev
 ```
+
+> **L'environnement e2e appartient au pipeline.** Chaque build Jenkins le recrée, puis le supprime à la fin. Si vous l'utilisez en local, le prochain push le fermera sous vos yeux (« Unable to connect »). En local, travaillez sur l'environnement **dev** (http://localhost:8090), qui n'appartient qu'à vous.
 
 Ouvrez deux onglets dans Firefox :
 
-- http://localhost:8089 : Embarq en e2e ;
+- http://localhost:8090 : Embarq en dev ;
 - http://localhost:7900 : le bureau du navigateur de la Selenium Grid (cliquez sur **Connect**). C'est là que vous verrez les tests travailler.
 
 Dans le premier onglet, faites une réservation à la main, puis inspectez la page (clic droit > **Inspecter**) : notez les `id` du lien « Réserver », des champs du formulaire, du bouton, et des éléments de la page de confirmation.
 
-**Question 1.** Le navigateur de la Grid ouvre `http://embarq-e2e:8080`, et pas `http://localhost:8089`. Pourquoi ?
+**Question 1.** Le navigateur de la Grid ouvre `http://embarq-dev:8080`, et pas `http://localhost:8090`. Pourquoi ?
 
 ## Étape 2 – Les Page Objects (25 min)
 
@@ -84,7 +86,7 @@ Complétez les deux `TODO` de `ReservationE2E`, puis lancez les tests end-to-end
 
 ```bash
 cd ~/iroise/embarq
-mvn -B -Pe2e verify -Dapp.url=http://embarq-e2e:8080
+mvn -B -Pe2e verify -Dapp.url=http://embarq-dev:8080
 ```
 
 Le profil Maven `e2e` ne lance que les classes `*E2E`, avec failsafe, sans les tests unitaires.

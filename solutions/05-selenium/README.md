@@ -10,7 +10,7 @@ Pour comparer avec votre travail : `diff -r solutions/05-selenium/embarq embarq`
 
 ## Étape 1
 
-**Question 1.** Le navigateur ne tourne pas sur votre machine, mais dans le conteneur `selenium`. Pour lui, `localhost` est ce conteneur. Il joint Embarq par le réseau Docker `lab`, où l'application de l'environnement e2e s'appelle `embarq-e2e` et écoute sur le port 8080 (le port 8089 n'existe que sur votre machine).
+**Question 1.** Le navigateur ne tourne pas sur votre machine, mais dans le conteneur `selenium`. Pour lui, `localhost` est ce conteneur. Il joint Embarq par le réseau Docker `lab`, où l'application de l'environnement dev s'appelle `embarq-dev` et écoute sur le port 8080 (le port 8090 n'existe que sur votre machine). Dans Jenkins, c'est la même chose avec `embarq-e2e`.
 
 ## Étape 2
 
