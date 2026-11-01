@@ -44,14 +44,14 @@ git show --stat $CHARTE
 git show $CHARTE -- embarq/src/main/resources/templates/reserver.html | head -60
 ```
 
-Redéployez l'environnement e2e avec la nouvelle charte, regardez la page, puis relancez les tests en local :
+Redéployez votre environnement **dev** avec la nouvelle charte, regardez la page (http://localhost:8090), puis relancez les tests en local :
 
 ```bash
 cd ~/iroise/embarq
 mvn -B -q package -DskipTests
 docker build -t embarq:local .
-bash deploy/deployer.sh e2e
-mvn -B -Pe2e verify -Dapp.url=http://embarq-e2e:8080
+bash deploy/deployer.sh dev
+mvn -B -Pe2e verify -Dapp.url=http://embarq-dev:8080
 ```
 
 **Question 1.** Quelle exception lèvent les tests ? Sur quels sélecteurs ? Quels changements de l'agence les ont cassés ?
@@ -101,7 +101,7 @@ final class TestId {
 
 Dans `PageAccueil`, `PageReservation` et `PageConfirmation`, remplacez tous les `By.id(…)`, `By.cssSelector(…)` et `By.xpath(…)` par `testId(…)` (avec `import static fr.iroise.embarq.e2e.TestId.testId;`). Pour `reserverSur(navire)`, parcourez les cartes `traversee` et gardez celle dont le `navire` a le bon texte.
 
-Reconstruisez l'image, redéployez e2e, relancez les tests : tout doit être vert.
+Reconstruisez l'image, redéployez dev, relancez les tests : tout doit être vert.
 
 **Question 3.** L'agence change à nouveau la couleur des boutons, remplace les cartes par un tableau et renomme les `id`. Que faut-il modifier dans les tests ?
 
@@ -153,7 +153,7 @@ Dans Jenkins, ouvrez **Tests** : les noms sont des phrases. Dans GitLab, ouvrez 
 
 **Question 4.** Qu'est-ce qu'une « documentation vivante » ? Lesquels de vos documents le sont, lesquels ne le sont pas ?
 
-**Question 5.** `-Dapp.url` permet de lancer les mêmes tests sur l'environnement e2e ou en préproduction. Quel problème de données peut-on rencontrer en préproduction ?
+**Question 5.** `-Dapp.url` permet de lancer les mêmes tests sur l'environnement dev, e2e ou en préproduction. Quel problème de données peut-on rencontrer en préproduction ?
 
 ## Questions de fin
 
